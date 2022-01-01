@@ -6,7 +6,7 @@ const geocode = (
         if (error){
             console.log(error)
         } else{
-            forecast(result.lat, result.long, result.name)
+            forecast(result.lat, result.long)
         }
 
     }

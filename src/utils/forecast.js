@@ -3,14 +3,13 @@ const request = require("postman-request")
 const forecast = (
     lat,
     long,
-    location,
     callback = (error, res) => {
 
         if (error) {
             console.log(error)
         } else{
-            const {time, desc, temp, feelslike} = res
-            console.log(`The local time in ${location} is ${time}.\nThe weather is ${desc}.\nThe temperature is ${temp} deg F and it feels like ${feelslike} deg F`)
+            const {city, country, time, desc, temp, feelslike} = res
+            console.log(`The local time in ${city},${country} is ${time}.\nThe weather is ${desc}.\nThe temperature is ${temp} deg F and it feels like ${feelslike} deg F`)
         }
 
     }

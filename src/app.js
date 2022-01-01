@@ -21,7 +21,9 @@ hbs.registerPartials(partialsPath)
 app.use(express.static(publicDirectoryPath))
 
 app.get("", (req, res) => {
-    res.render("index")
+    res.render("index", {
+        data: null
+    })
 })
 
 app.get("/about", (req, res) => {
@@ -51,7 +53,7 @@ app.get("/weather", (req, res) => {
         if (error) {
             return res.send({ error })
         } else {
-            forecast(lat, long, name, (error, forecastRes) => {
+            forecast(lat, long, (error, forecastRes) => {
                 if (error) {
                     return res.send({ error })
                 } else {
