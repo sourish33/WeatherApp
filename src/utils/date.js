@@ -5,4 +5,4 @@ const makeHumanDate = (dt) =>{
     return humanDateFormat
   }
 
-  module.exports.makeHumanDate=makeHumanDate
+  module.exports.makeHumanDate = makeHumanDate
