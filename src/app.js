@@ -61,8 +61,7 @@ app.get("/weather", (req, res) => {
                     console.log(forecastRes)
                     const { city, country, time, desc, temp, feelslike } = forecastRes
                     res.send({
-                        forecast: `The local time in ${city}, ${country} is ${time}.The weather is ${desc}.The temperature is ${temp} deg F and it feels like ${feelslike} deg F`,
-                        location,
+                        data: forecastRes
                         // address: req.query.address,
                     })
                 }

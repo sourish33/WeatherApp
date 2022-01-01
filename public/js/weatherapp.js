@@ -10,7 +10,7 @@ const handleClick= () =>{
     const searchquerry = `http://localhost:3000/weather?address=${encodeURIComponent(loc)}`
     fetch(searchquerry).then((response)=>response.json()).then((response)=>{
             
-            alerttext.innerHTML=response.forecast
+            alerttext.innerHTML=response.data.city
         })
 }
 
