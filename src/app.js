@@ -72,6 +72,10 @@ app.get("/weather", (req, res) => {
     })
 })
 
+app.get('/weatherpage', (req, res)=>{
+    res.render("weatherPage")
+})
+
 app.get("/help/*", (req, res) => {
     res.render("404", {
         title: "404",
