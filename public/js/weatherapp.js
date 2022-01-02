@@ -9,8 +9,8 @@ const handleClick= () =>{
     const loc = formInput.value
     const searchquerry = `http://localhost:3000/weather?address=${encodeURIComponent(loc)}`
     fetch(searchquerry).then((response)=>response.json()).then((response)=>{
-            
-            alerttext.innerHTML=response.data.city
+            const {city, country, time, temp, desc} = response.data
+            alerttext.innerHTML=`the weather in ${city}, ${country} is ${desc} and the temperature is ${temp} F`
         })
 }
 
