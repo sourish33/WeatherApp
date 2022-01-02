@@ -112,7 +112,7 @@ const fillDailyData = (response) => {
         let singleDay = fillSingleDay(day)
         newData+=singleDay
     }
-    daily.innerHTML = newData
+    daily.innerHTML+=newData
 
 }
 
