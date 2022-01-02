@@ -1,19 +1,9 @@
 const request = require("postman-request")
-const {forecast} = require('./forecast')
-const geocode = (
-    address,
-    callback = (error, result) => {
-        if (error){
-            console.log(error)
-        } else{
-            forecast(result.lat, result.long)
-        }
-
-    }
-) => {
+const { forecast } = require("./forecast")
+const geocode = function (address, callback) {
     const addr = encodeURIComponent(address)
     const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${addr}.json?access_token=pk.eyJ1Ijoic291cmlzaDMzIiwiYSI6ImNreG5oN2M4NjZhem8zMW11emwxeTNxNTUifQ.aGPirHsIa1WdNXe4TwoE-g&limit=1`
-    request({ url: url, json: true }, (err, {body}) => {
+    request({ url: url, json: true }, (err, { body }) => {
         if (err) {
             callback("Check your internet connection", undefined)
         } else if (body.features.length === 0) {
@@ -27,6 +17,5 @@ const geocode = (
         }
     })
 }
-
 
 module.exports.geocode = geocode

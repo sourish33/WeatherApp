@@ -1,21 +1,8 @@
 const request = require("postman-request")
 
-const forecast = (
-    lat,
-    long,
-    callback = (error, res) => {
-
-        if (error) {
-            console.log(error)
-        } else{
-            const {city, country, time, desc, temp, feelslike} = res
-            console.log(`The local time in ${city},${country} is ${time}.\nThe weather is ${desc}.\nThe temperature is ${temp} deg F and it feels like ${feelslike} deg F`)
-        }
-
-    }
-) => {
+const forecast = (lat, long, callback) => {
     const url = `http://api.weatherstack.com/current?access_key=1ff4b1d71ce085f829ca105c2ae91ffb&query=${lat},${long}&units=f`
-    request({ url: url, json: true }, (err, {body}) => {
+    request({ url: url, json: true }, (err, { body }) => {
         if (err) {
             callback("Check your internet connection", undefined)
         } else if (body.error) {
@@ -33,4 +20,4 @@ const forecast = (
     })
 }
 
-module.exports.forecast =forecast
+module.exports.forecast = forecast
