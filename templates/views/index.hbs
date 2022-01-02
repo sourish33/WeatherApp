@@ -59,55 +59,46 @@
             </div>
             <div class="row g-3">
                 <div class="col-12 col-md-6 col-lg-4">
-                    {{!-- HEYAHH --}}
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Current Conditions</h5>
                             <table class="table">
-                                <tbody>
+                                <tbody id="currentData">
                                     <tr>
                                         <th scope="row">Name</th>
-                                        <td>Nashville</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Country</th>
-                                        <td>USA</td>
+                                        <td id="current-location">Nashville, USA</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Latitude</th>
-                                        <td>36.42</td>
+                                        <td id="lat">36.42</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Longitude</th>
-                                        <td>-86.43</td>
+                                        <td id="long">-86.43</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Condition</th>
                                         <td>
-                                            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
-                                            <p>Cloudy</p>
+                                            <img id="image" src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
+                                            <p id = "desc">Cloudy</p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Temperature</th>
-                                        <td>36 F</td>
+                                        <td id="temp">36 F</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Wind</th>
-                                        <td>3 mph N</td>
+                                        <td id="wind">3 mph N</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Sunrise</th>
-                                        <td>6:30 AM</td>
+                                        <td id="sunrise">6:30 AM</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Sunset</th>
-                                        <td>5:15 PM</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Rainfall</th>
-                                        <td>35%</td>
+                                        <td id="sunset">5:15 PM</td>
                                     </tr>
                                 </tbody>
                             </table>

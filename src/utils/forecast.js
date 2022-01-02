@@ -11,7 +11,7 @@ const forecast = (lat, long, callback) => {
         } else {
             const data = {}
             data.lat = body.lat
-            data.long = body.long
+            data.long = body.lon
             data.current = body.current
             data.hourly = body.hourly
             data.daily = body.daily
