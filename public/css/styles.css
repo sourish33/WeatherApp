@@ -1,9 +1,26 @@
 body {
     color: #333333;
     font-family: arial;
+    background: #F6F2D4;
 }
 
 .bold {
     font-weight: bold;
     color: blue;
+}
+
+.navbarstyle {
+    background: #22577E;
+}
+
+.white-text {
+    color:white
+}
+
+.current {
+    background: #95D1CC;
+}
+
+.hourly {
+    background: #5584AC;
 }
