@@ -75,22 +75,26 @@ const fillHourlyData = (response) =>{
 
 const fillDailyData = (response) => {
     const daily = document.getElementById("dailyTable")
+    const dayData = response.data.daily[0]
+    const {dt, sunrise, sunset, temp, wind_speed, wind_deg, weather, pop} = dayData
+    const precipProb = parseFloat(pop)*100
+    const precip = precipProb>1 ? `<p>Rain/snow: ${precipProb.toFixed(0)}%</p>`: ``
     const newData = `
     <div class="card mt-4">
     <div class="card-header">
-       Sunday, 01/02/22
+        ${dt}
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">                                            
-          <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
-        <p>Partially Cloudy</p>
-        <p> 30% chance of rain</p>
+          <img src="http://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="weather icon">
+        <p>${weather[0].main}</p>
+        ${precip}
     </li>
-      <li class="list-group-item">Sunrise: 5:13 AM</li>
-      <li class="list-group-item">Sunset: 7:15 PM</li>
-      <li class="list-group-item">High: 32 F</li>
-      <li class="list-group-item">Low: 15 F</li>
-      <li class="list-group-item">Wind: 33 mph NSW</li>
+      <li class="list-group-item">Sunrise: ${sunrise}</li>
+      <li class="list-group-item">Sunset: ${sunset}</li>
+      <li class="list-group-item">High: ${temp.max.toFixed(0)} F</li>
+      <li class="list-group-item">Low: ${temp.min.toFixed(0)} F</li>
+      <li class="list-group-item">Wind: ${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</li>
     </ul>
   </div>
     `
