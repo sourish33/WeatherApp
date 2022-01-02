@@ -7,6 +7,8 @@ const alerttext = document.getElementById("alerttext")
 const getTime = (dt) => new Date(parseInt(dt)*1000).toLocaleTimeString("en-US")
 const getTimeShort = (dt) => new Date(parseInt(dt)*1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 const getDate = (dt) => new Date(parseInt(dt)*1000).toLocaleDateString("en-US")
+const getDateLong = (dt) => new Date(parseInt(dt)*1000).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+
 
 const fillCurrentData =(response)=>{
     const { lat, long, current, hourly, daily, alerts, name }= response.data
@@ -38,16 +40,16 @@ const fillSingleHour = (oneHour) => {
     const newData = `
     <thead>
     <tr>
-        <th scope="col">Time</th>
-        <th scope="col">Temp</th>
-        <th scope="col">Weather</th>
-        <th scope="col">Wind</th>
+        <th scope="col" class="bold">Time</th>
+        <th scope="col" class="bold">Temp</th>
+        <th scope="col" class="bold">Weather</th>
+        <th scope="col" class="bold">Wind</th>
     </tr>
 </thead>
 <tbody>
     <tr>
         <th scope="row">${getTimeShort(dt)}</th>
-        <td>49 F</td>
+        <td>${temp.toFixed(0)} ${String.fromCharCode(176)}F</td>
         <td>                                            
             <img src="http://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="weather icon">
             <p>${weather[0].main}</p>
@@ -81,8 +83,8 @@ const fillDailyData = (response) => {
     const precip = precipProb>1 ? `<p>Rain/snow: ${precipProb.toFixed(0)}%</p>`: ``
     const newData = `
     <div class="card mt-4">
-    <div class="card-header">
-        ${dt}
+    <div class="card-header bold">
+        ${getDateLong(dt)}
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">                                            
@@ -90,11 +92,11 @@ const fillDailyData = (response) => {
         <p>${weather[0].main}</p>
         ${precip}
     </li>
-      <li class="list-group-item">Sunrise: ${sunrise}</li>
-      <li class="list-group-item">Sunset: ${sunset}</li>
-      <li class="list-group-item">High: ${temp.max.toFixed(0)} F</li>
-      <li class="list-group-item">Low: ${temp.min.toFixed(0)} F</li>
-      <li class="list-group-item">Wind: ${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</li>
+      <li class="list-group-item"><span class="bold">Sunrise</span>: ${getTime(sunrise)}</li>
+      <li class="list-group-item"><span class="bold">Sunset</span>: ${getTime(sunset)}</li>
+      <li class="list-group-item"><span class="bold">High</span>: ${temp.max.toFixed(0)} ${String.fromCharCode(176)}F</li>
+      <li class="list-group-item"><span class="bold">Low</span>: ${temp.min.toFixed(0)} ${String.fromCharCode(176)}F</li>
+      <li class="list-group-item"><span class="bold">Wind</span>: ${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</li>
     </ul>
   </div>
     `
