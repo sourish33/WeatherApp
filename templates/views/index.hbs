@@ -57,7 +57,7 @@
                       
                 </div>
             </div>
-            <div class="row g-3">
+            <div class="row g-3" id="weatherRow" style="visibility:hidden">
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card">
                         <div class="card-body">
@@ -67,7 +67,7 @@
                                     <tr>
                                         <th scope="row">Name</th>
                                         <td id="current-location">Nashville, USA</td>
-                                    </tr>
+                                    </tr>                                
                                     <tr>
                                         <th scope="row">Latitude</th>
                                         <td id="lat">36.42</td>
@@ -163,12 +163,12 @@
 
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="alertrow" style="display: none;">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">Alert</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">Flood Watch</h6>
+                          <h6 class="card-subtitle mb-2 text-muted"><span id="event">Flood Watch</span>, <span  id="startTime">3:45 PM</span> to <span  id="endTime">4:15 PM</span> </h6>
                           <p class="card-text" id="alerttext">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
                       </div>
