@@ -60,6 +60,7 @@ app.get("/weather", (req, res) => {
                     const location = req.query.address
                     // console.log(forecastRes)
                     const { lat, long, current, hourly, daily, alerts } = forecastRes
+                    forecastRes.name = name
                     res.send({
                         data: forecastRes
                         // address: req.query.address,
