@@ -33,7 +33,7 @@ const fillCurrentData =(response)=>{
 const fillSingleHour = (oneHour) => {
     const {dt, temp, wind_speed, wind_deg, weather, pop} = oneHour
     const precipProb = parseFloat(pop)*100
-    const precip = precipProb>1 ? `<p> Precipitation: ${precipProb.toFixed(0)}%</p>`: ``
+    const precip = precipProb>1 ? `<p>Rain/snow:${precipProb.toFixed(0)}%</p>`: ``
     const hourly = document.getElementById("hourlyTable")
     const newData = `
     <thead>
