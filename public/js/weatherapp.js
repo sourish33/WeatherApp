@@ -75,10 +75,9 @@ const fillHourlyData = (response) =>{
     hourly.innerHTML = newData
 }
 
-const fillDailyData = (response) => {
-    const daily = document.getElementById("dailyTable")
-    const dayData = response.data.daily[0]
-    const {dt, sunrise, sunset, temp, wind_speed, wind_deg, weather, pop} = dayData
+const fillSingleDay = (oneDay) => {
+    // const daily = document.getElementById("dailyTable")
+    const {dt, sunrise, sunset, temp, wind_speed, wind_deg, weather, pop} = oneDay
     const precipProb = parseFloat(pop)*100
     const precip = precipProb>1 ? `<p>Rain/snow: ${precipProb.toFixed(0)}%</p>`: ``
     const newData = `
@@ -100,6 +99,18 @@ const fillDailyData = (response) => {
     </ul>
   </div>
     `
+    return newData
+
+}
+
+const fillDailyData = (response) => {
+    const daily = document.getElementById("dailyTable")
+    const daysData = response.data.daily.slice(1)
+    let newData =''
+    for (let day of daysData) {
+        let singleDay = fillSingleDay(day)
+        newData+=singleDay
+    }
     daily.innerHTML = newData
 
 }
