@@ -33,7 +33,7 @@ const fillCurrentData =(response)=>{
 const fillSingleHour = (oneHour) => {
     const {dt, temp, wind_speed, wind_deg, weather, pop} = oneHour
     const precipProb = parseFloat(pop)*100
-    const precip = precipProb>1 ? `<p>Rain/snow:${precipProb.toFixed(0)}%</p>`: ``
+    const precip = precipProb>1 ? `<p>Rain/snow: ${precipProb.toFixed(0)}%</p>`: ``
     const hourly = document.getElementById("hourlyTable")
     const newData = `
     <thead>
@@ -73,6 +73,31 @@ const fillHourlyData = (response) =>{
     hourly.innerHTML = newData
 }
 
+const fillDailyData = (response) => {
+    const daily = document.getElementById("dailyTable")
+    const newData = `
+    <div class="card mt-4">
+    <div class="card-header">
+       Sunday, 01/02/22
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">                                            
+          <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
+        <p>Partially Cloudy</p>
+        <p> 30% chance of rain</p>
+    </li>
+      <li class="list-group-item">Sunrise: 5:13 AM</li>
+      <li class="list-group-item">Sunset: 7:15 PM</li>
+      <li class="list-group-item">High: 32 F</li>
+      <li class="list-group-item">Low: 15 F</li>
+      <li class="list-group-item">Wind: 33 mph NSW</li>
+    </ul>
+  </div>
+    `
+    daily.innerHTML = newData
+
+}
+
 const handleClick= () =>{
     console.log(`You entered ${formInput.value}`)
     const loc = formInput.value
@@ -81,6 +106,7 @@ const handleClick= () =>{
         document.getElementById("weatherRow").style.visibility="visible"
         fillCurrentData(response)
         fillHourlyData(response)
+        fillDailyData(response)
         })
 }
 
