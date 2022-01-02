@@ -58,8 +58,8 @@ app.get("/weather", (req, res) => {
                     return res.send({ error })
                 } else {
                     const location = req.query.address
-                    console.log(forecastRes)
-                    const { city, country, time, desc, temp, feelslike } = forecastRes
+                    // console.log(forecastRes)
+                    const { lat, long, current, hourly, daily, alerts } = forecastRes
                     res.send({
                         data: forecastRes
                         // address: req.query.address,
