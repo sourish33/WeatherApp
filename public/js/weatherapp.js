@@ -31,7 +31,7 @@ const fillCurrentData =(response)=>{
 }
 
 const fillSingleHour = (oneHour) => {
-    const {dt, temp, wind_speed, wind_deg, weather, pop} = response.data.hourly[0]
+    const {dt, temp, wind_speed, wind_deg, weather, pop} = oneHour
     const precipProb = parseFloat(pop)*100
     const precip = precipProb>1 ? `<p> Precipitation: ${precipProb.toFixed(0)}%</p>`: ``
     const hourly = document.getElementById("hourlyTable")
@@ -62,32 +62,14 @@ const fillSingleHour = (oneHour) => {
 }
 
 const fillHourlyData = (response) =>{
-    const {dt, temp, wind_speed, wind_deg, weather, pop} = response.data.hourly[0]
-    const precipProb = parseFloat(pop)*100
-    const precip = precipProb>1 ? `<p> Precipitation: ${precipProb.toFixed(0)}%</p>`: ``
-    const hourly = document.getElementById("hourlyTable")
-    const newData = `
-    <thead>
-    <tr>
-        <th scope="col">Time</th>
-        <th scope="col">Temp</th>
-        <th scope="col">Weather</th>
-        <th scope="col">Wind</th>
-    </tr>
-</thead>
-<tbody>
-    <tr>
-        <th scope="row">${getTimeShort(dt)}</th>
-        <td>49 F</td>
-        <td>                                            
-            <img src="http://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="weather icon">
-            <p>${weather[0].main}</p>
-            ${precip}
-        </td>
-        <td>${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</td>
-    </tr>
-</tbody>
-    `
+    // const newData = fillSingleHour(response.data.hourly[3])
+    const hourly= document.getElementById("hourlyTable")
+    const nextEightHours = response.data.hourly.length>8? response.data.hourly.slice(0, 8) : response.data.hourly
+    let newData=''
+    for (let el of nextEightHours) {
+        let hourData = fillSingleHour(el)
+        newData+=hourData
+    }
     hourly.innerHTML = newData
 }
 
