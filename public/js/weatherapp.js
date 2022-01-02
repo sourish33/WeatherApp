@@ -5,6 +5,7 @@ const formInput = document.getElementById("formInput")
 const alerttext = document.getElementById("alerttext")
 
 const getTime = (dt) => new Date(parseInt(dt)*1000).toLocaleTimeString("en-US")
+const getTimeShort = (dt) => new Date(parseInt(dt)*1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 const getDate = (dt) => new Date(parseInt(dt)*1000).toLocaleDateString("en-US")
 
 const fillCurrentData =(response)=>{
@@ -29,6 +30,67 @@ const fillCurrentData =(response)=>{
     
 }
 
+const fillSingleHour = (oneHour) => {
+    const {dt, temp, wind_speed, wind_deg, weather, pop} = response.data.hourly[0]
+    const precipProb = parseFloat(pop)*100
+    const precip = precipProb>1 ? `<p> Precipitation: ${precipProb.toFixed(0)}%</p>`: ``
+    const hourly = document.getElementById("hourlyTable")
+    const newData = `
+    <thead>
+    <tr>
+        <th scope="col">Time</th>
+        <th scope="col">Temp</th>
+        <th scope="col">Weather</th>
+        <th scope="col">Wind</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <th scope="row">${getTimeShort(dt)}</th>
+        <td>49 F</td>
+        <td>                                            
+            <img src="http://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="weather icon">
+            <p>${weather[0].main}</p>
+            ${precip}
+        </td>
+        <td>${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</td>
+    </tr>
+</tbody>
+    `
+    return newData
+
+}
+
+const fillHourlyData = (response) =>{
+    const {dt, temp, wind_speed, wind_deg, weather, pop} = response.data.hourly[0]
+    const precipProb = parseFloat(pop)*100
+    const precip = precipProb>1 ? `<p> Precipitation: ${precipProb.toFixed(0)}%</p>`: ``
+    const hourly = document.getElementById("hourlyTable")
+    const newData = `
+    <thead>
+    <tr>
+        <th scope="col">Time</th>
+        <th scope="col">Temp</th>
+        <th scope="col">Weather</th>
+        <th scope="col">Wind</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <th scope="row">${getTimeShort(dt)}</th>
+        <td>49 F</td>
+        <td>                                            
+            <img src="http://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="weather icon">
+            <p>${weather[0].main}</p>
+            ${precip}
+        </td>
+        <td>${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</td>
+    </tr>
+</tbody>
+    `
+    hourly.innerHTML = newData
+}
+
 const handleClick= () =>{
     console.log(`You entered ${formInput.value}`)
     const loc = formInput.value
@@ -36,6 +98,7 @@ const handleClick= () =>{
     fetch(searchquerry).then((response)=>response.json()).then((response)=>{
         document.getElementById("weatherRow").style.visibility="visible"
         fillCurrentData(response)
+        fillHourlyData(response)
         })
 }
 
