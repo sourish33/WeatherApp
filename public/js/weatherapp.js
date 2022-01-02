@@ -105,6 +105,7 @@ const fillSingleDay = (oneDay) => {
 
 const fillDailyData = (response) => {
     const daily = document.getElementById("dailyTable")
+    daily.innerHTML = `<h5 class="card-title">Daily Forecast</h5>`
     const daysData = response.data.daily.slice(1)
     let newData =''
     for (let day of daysData) {
@@ -117,6 +118,7 @@ const fillDailyData = (response) => {
 
 const handleClick= () =>{
     console.log(`You entered ${formInput.value}`)
+    document.getElementById("alertrow").style.display="none"
     const loc = formInput.value
     const searchquerry = `http://localhost:3000/weather?address=${encodeURIComponent(loc)}`
     fetch(searchquerry).then((response)=>response.json()).then((response)=>{

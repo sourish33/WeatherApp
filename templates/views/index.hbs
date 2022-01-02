@@ -58,6 +58,17 @@
                       
                 </div>
             </div>
+            <div class="row" id="alertrow" style="display: none;">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Alert</h5>
+                          <h6 class="card-subtitle mb-2 text-muted"><span id="event">Flood Watch</span>, <span  id="startTime">3:45 PM</span> to <span  id="endTime">4:15 PM</span> </h6>
+                          <p class="card-text" id="alerttext">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                      </div>
+                </div>
+            </div>
             <div class="row g-3" id="weatherRow" style="visibility:hidden">
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card">
@@ -140,7 +151,7 @@
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card">
                         <div class="card-body" id="dailyTable">
-                            <h5 class="card-title">Daily Forecast</h5>
+                            {{!-- <h5 class="card-title">Daily Forecast</h5> --}}
                             {{!-- HEYAHH --}}
                             {{!-- <div class="card mt-4">
                                 <div class="card-header">
@@ -164,17 +175,7 @@
 
                 </div>
             </div>
-            <div class="row" id="alertrow" style="display: none;">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Alert</h5>
-                          <h6 class="card-subtitle mb-2 text-muted"><span id="event">Flood Watch</span>, <span  id="startTime">3:45 PM</span> to <span  id="endTime">4:15 PM</span> </h6>
-                          <p class="card-text" id="alerttext">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                      </div>
-                </div>
-            </div>
+
         </div>
 
         <script
