@@ -50,12 +50,16 @@
                 </div>
             </nav>
             <div class="row g-3">
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="col-lg-4 col-md-6 col-sm-10 mb-4">
                       <div class="input-group">
                         <input type="text" class="form-control" placeholder="City" id="formInput">
                         <button class="btn btn-primary" type="button" id="submitBtn">Get Weather</button>
-                      </div>
-                      
+                      </div> 
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2" id="spinner" style="display: none;">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div> 
                 </div>
             </div>
             <div class="row" id="alertrow" style="display: none;">

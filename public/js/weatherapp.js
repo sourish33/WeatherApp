@@ -119,9 +119,11 @@ const fillDailyData = (response) => {
 const handleClick= () =>{
     console.log(`You entered ${formInput.value}`)
     document.getElementById("alertrow").style.display="none"
+    document.getElementById("spinner").style.display="block"
     const loc = formInput.value
     const searchquerry = `http://localhost:3000/weather?address=${encodeURIComponent(loc)}`
     fetch(searchquerry).then((response)=>response.json()).then((response)=>{
+        document.getElementById("spinner").style.display="none"
         document.getElementById("weatherRow").style.visibility="visible"
         fillCurrentData(response)
         fillHourlyData(response)
