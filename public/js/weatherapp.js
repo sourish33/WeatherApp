@@ -170,7 +170,7 @@ const handleClick = () => {
 
     document.getElementById("alertrow").style.display = "none"
     document.getElementById("spinner").style.display = "block"
-    const searchquerry = `http://localhost:3000/weather?address=${encodeURIComponent(loc)}`
+    const searchquerry = `/weather?address=${encodeURIComponent(loc)}`
     processData(searchquerry)
 }
 
@@ -190,7 +190,7 @@ const options = {
     const crd = pos.coords
     const LAT = crd.latitude
     const LNG = crd.longitude
-    const searchquerry = `http://localhost:3000/coords?lat=${LAT}&long=${LNG}`
+    const searchquerry = `/coords?lat=${LAT}&long=${LNG}`
     processData(searchquerry)
   }
   
