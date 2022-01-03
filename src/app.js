@@ -4,7 +4,7 @@ const hbs = require("hbs")
 
 const { geocode } = require("./utils/geocode")
 const { forecast } = require("./utils/forecast")
-const {getloc} = require('./getloc')
+const {getloc} = require('./utils/getloc')
 
 const app = express()
 
@@ -60,7 +60,6 @@ app.get("/weather", (req, res) => {
                     return res.send({ error: error, data: null })
                 } else {
                     const location = req.query.address
-                    // console.log(forecastRes)
                     const { lat, long, current, hourly, daily, alerts } = forecastRes
                     forecastRes.name = name
                     res.send({
