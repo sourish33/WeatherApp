@@ -143,6 +143,24 @@ const fillDailyData = (data) => {
     daily.innerHTML += newData
 }
 
+const processData = (searchquerry) =>{
+    fetch(searchquerry)
+    .then((response) => response.json())
+    .then((response) => {
+        document.getElementById("spinner").style.display = "none"
+        const { error, data } = response
+        if (error) {
+            alert(`Error: ${error}`)
+            return
+        }
+        document.getElementById("weatherRow").style.visibility = "visible"
+        fillCurrentData(data)
+        fillHourlyData(data)
+        fillDailyData(data)
+    })
+
+}
+
 const handleClick = () => {
     const loc = formInput.value.trim()
     if (loc.length === 0) {
@@ -152,23 +170,8 @@ const handleClick = () => {
 
     document.getElementById("alertrow").style.display = "none"
     document.getElementById("spinner").style.display = "block"
-    const searchquerry = `http://localhost:3000/weather?address=${encodeURIComponent(
-        loc
-    )}`
-    fetch(searchquerry)
-        .then((response) => response.json())
-        .then((response) => {
-            document.getElementById("spinner").style.display = "none"
-            const { error, data } = response
-            if (error) {
-                alert(`Error: ${error}`)
-                return
-            }
-            document.getElementById("weatherRow").style.visibility = "visible"
-            fillCurrentData(data)
-            fillHourlyData(data)
-            fillDailyData(data)
-        })
+    const searchquerry = `http://localhost:3000/weather?address=${encodeURIComponent(loc)}`
+    processData(searchquerry)
 }
 
 const clearData = () => {
@@ -176,9 +179,31 @@ const clearData = () => {
     document.getElementById("alertrow").style.display = "none"
     document.getElementById("weatherRow").style.visibility = "hidden"
 }
+
+const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
+  
+  function success(pos) {
+    const crd = pos.coords
+    const LAT = crd.latitude
+    const LNG = crd.longitude
+    const searchquerry = `http://localhost:3000/coords?lat=${LAT}&long=${LNG}`
+    processData(searchquerry)
+  }
+  
+  function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+  
+
+  
 document.getElementById("submitBtn").addEventListener("click", handleClick)
 document.getElementById("clearBtn").addEventListener("click", clearData)
 document.getElementById("alertCloseButton").addEventListener("click", () => {
     document.getElementById("alertrow").style.display = "none"
 })
 clearData()
+navigator.geolocation.getCurrentPosition(success, error, options);

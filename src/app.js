@@ -4,6 +4,7 @@ const hbs = require("hbs")
 
 const { geocode } = require("./utils/geocode")
 const { forecast } = require("./utils/forecast")
+const {getloc} = require('./getloc')
 
 const app = express()
 
@@ -46,6 +47,7 @@ app.get("/weather", (req, res) => {
     if (!req.query.address) {
         res.send({
             error: "Address must be provided",
+            data: null
         })
         return
     }
@@ -69,6 +71,34 @@ app.get("/weather", (req, res) => {
                 }
             })
         }
+    })
+})
+
+app.get("/coords", (req, res) =>{
+    if (!req.query.lat || !req.query.long) {
+        return res.send({error: "Invalid Lat/Long", data: null})
+    }
+    const LAT = req.query.lat
+    const LNG = req.query.long
+    getloc(LAT, LNG, (err, LAT, LNG, {name})=>{
+        if (err){
+            return console.log("Geolocation failed")
+        }
+        forecast(LAT, LNG, (error, forecastRes) => {
+            if (error) {
+                return res.send({ error: error, data: null })
+            } else {
+                // const location = req.query.address
+                console.log(name)
+                const { lat, long, current, hourly, daily, alerts } = forecastRes
+                forecastRes.name = name
+                res.send({
+                    error: null,
+                    data: forecastRes
+                    // address: req.query.address,
+                })
+            }
+        })
     })
 })
 
