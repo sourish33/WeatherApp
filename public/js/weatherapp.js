@@ -81,7 +81,7 @@ const fillHourlyData = (data) => {
     const hourly = document.getElementById("hourlyTable")
     hourly.innerHTML = `<h5 class="card-title">Hourly Forecast</h5>`
     const nextEightHours =
-        data.hourly.length > 8 ? data.hourly.slice(0, 8) : data.hourly
+        data.hourly.length > 9 ? data.hourly.slice(1, 9) : data.hourly
     let newData = ""
     for (let el of nextEightHours) {
         let hourData = fillSingleHour(el)
