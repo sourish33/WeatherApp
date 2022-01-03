@@ -196,11 +196,13 @@ const options = {
   
   function error(err) {
     alert(`Automatic geolocation failed. Enter your location manually.`)
+    document.getElementById("spinner").style.display = "none"
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
   const autoLocate = () =>{
     navigator.geolocation.getCurrentPosition(success, error, options);
+    document.getElementById("spinner").style.display = "block"
   }
   
 
