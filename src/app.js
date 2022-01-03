@@ -54,22 +54,22 @@ app.get("/weather", (req, res) => {
     geocode(req.query.address, (error, { lat, long, name }={}) => {
         if (error) {
             return res.send({ error: error, data: null })
-        } else {
-            forecast(lat, long, (error, forecastRes) => {
-                if (error) {
-                    return res.send({ error: error, data: null })
-                } else {
-                    const location = req.query.address
-                    const { lat, long, current, hourly, daily, alerts } = forecastRes
-                    forecastRes.name = name
-                    res.send({
-                        error: null,
-                        data: forecastRes
-                        // address: req.query.address,
-                    })
-                }
-            })
-        }
+        } 
+        forecast(lat, long, (error, forecastRes) => {
+            if (error) {
+                return res.send({ error: error, data: null })
+            } else {
+                const location = req.query.address
+                const { lat, long, current, hourly, daily, alerts } = forecastRes
+                forecastRes.name = name
+                res.send({
+                    error: null,
+                    data: forecastRes
+                    // address: req.query.address,
+                })
+            }
+        })
+
     })
 })
 
@@ -87,14 +87,11 @@ app.get("/coords", (req, res) =>{
             if (error) {
                 return res.send({ error: error, data: null })
             } else {
-                // const location = req.query.address
-                console.log(name)
                 const { lat, long, current, hourly, daily, alerts } = forecastRes
                 forecastRes.name = name
                 res.send({
                     error: null,
-                    data: forecastRes
-                    // address: req.query.address,
+                    data: forecastRes,
                 })
             }
         })
