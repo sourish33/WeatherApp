@@ -63,9 +63,7 @@ const fillSingleHour = (oneHour) => {
         <td>${temp.toFixed(0)} ${String.fromCharCode(176)}F</td>
         <td>
             <p>${weather[0].main}</p>                                        
-            <img src="http://openweathermap.org/img/wn/${
-                weather[0].icon
-            }@2x.png" alt="weather icon">
+            <img src="/img/icons/${weather[0].icon}.png" alt="weather icon">
             ${precip}
         </td>
         <td>${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</td>
@@ -105,9 +103,7 @@ const fillSingleDay = (oneDay) => {
     <ul class="list-group list-group-flush">
       <li class="list-group-item">   
         <p>${weather[0].main}</p>                                         
-          <img src="http://openweathermap.org/img/wn/${
-              weather[0].icon
-          }@2x.png" alt="weather icon">
+          <img src="/img/icons/${weather[0].icon}.png" alt="weather icon">
         ${precip}
     </li>
       <li class="list-group-item"><span class="bold">Sunrise</span>: ${getTime(
