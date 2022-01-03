@@ -24,7 +24,7 @@ const fillCurrentData = (data) => {
     document.getElementById("current-location").innerHTML = name
     document.getElementById("lat").innerHTML = lat.toFixed(2)
     document.getElementById("long").innerHTML = long.toFixed(2)
-    document.getElementById("image").src = `http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`
+    document.getElementById("image").src = `/img/icons/${current.weather[0].icon}.png`
     document.getElementById("desc").innerHTML = current.weather[0].description
     document.getElementById("temp").innerHTML = `${current.temp.toFixed(0)} ${String.fromCharCode(176)}F`
     document.getElementById("wind").innerHTML =`${current["wind_speed"].toFixed(0)} mph, ${current["wind_deg"].toFixed(0)}` + String.fromCharCode(176)
