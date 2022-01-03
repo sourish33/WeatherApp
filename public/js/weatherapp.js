@@ -195,15 +195,22 @@ const options = {
   }
   
   function error(err) {
+    alert(`Automatic geolocation failed. Enter your location manually.`)
     console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  const autoLocate = () =>{
+    navigator.geolocation.getCurrentPosition(success, error, options);
   }
   
 
   
 document.getElementById("submitBtn").addEventListener("click", handleClick)
 document.getElementById("clearBtn").addEventListener("click", clearData)
+document.getElementById("useMyLoc").addEventListener('click', autoLocate)
 document.getElementById("alertCloseButton").addEventListener("click", () => {
     document.getElementById("alertrow").style.display = "none"
 })
 clearData()
-navigator.geolocation.getCurrentPosition(success, error, options);
+autoLocate()
+
