@@ -10,8 +10,8 @@ const getDate = (dt) => new Date(parseInt(dt)*1000).toLocaleDateString("en-US")
 const getDateLong = (dt) => new Date(parseInt(dt)*1000).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
 
 
-const fillCurrentData =(response)=>{
-    const { lat, long, current, hourly, daily, alerts, name }= response.data
+const fillCurrentData =(data)=>{
+    const { lat, long, current, hourly, daily, alerts, name }= data
     document.getElementById("current-location").innerHTML=name
     document.getElementById("lat").innerHTML=lat.toFixed(2)
     document.getElementById("long").innerHTML=long.toFixed(2)
@@ -63,10 +63,9 @@ const fillSingleHour = (oneHour) => {
 
 }
 
-const fillHourlyData = (response) =>{
-    // const newData = fillSingleHour(response.data.hourly[3])
+const fillHourlyData = (data) =>{
     const hourly= document.getElementById("hourlyTable")
-    const nextEightHours = response.data.hourly.length>8? response.data.hourly.slice(0, 8) : response.data.hourly
+    const nextEightHours = data.hourly.length>8? data.hourly.slice(0, 8) : data.hourly
     let newData=''
     for (let el of nextEightHours) {
         let hourData = fillSingleHour(el)
@@ -103,10 +102,10 @@ const fillSingleDay = (oneDay) => {
 
 }
 
-const fillDailyData = (response) => {
+const fillDailyData = (data) => {
     const daily = document.getElementById("dailyTable")
     daily.innerHTML = `<h5 class="card-title">Daily Forecast</h5>`
-    const daysData = response.data.daily.slice(1)
+    const daysData = data.daily.slice(1)
     let newData =''
     for (let day of daysData) {
         let singleDay = fillSingleDay(day)
@@ -129,14 +128,15 @@ const handleClick= () =>{
     const searchquerry = `http://localhost:3000/weather?address=${encodeURIComponent(loc)}`
     fetch(searchquerry).then((response)=>response.json()).then((response)=>{
         document.getElementById("spinner").style.display="none"
-        if (response.error){
-            alert(`Error: ${response.error}`)
+        const {error, data} = response
+        if (error){
+            alert(`Error: ${error}`)
             return
         }
         document.getElementById("weatherRow").style.visibility="visible"
-        fillCurrentData(response)
-        fillHourlyData(response)
-        fillDailyData(response)
+        fillCurrentData(data)
+        fillHourlyData(data)
+        fillDailyData(data)
         })
 }
 
