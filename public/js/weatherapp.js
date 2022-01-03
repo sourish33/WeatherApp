@@ -28,8 +28,6 @@ const fillCurrentData = (data) => {
     document.getElementById("desc").innerHTML = current.weather[0].description
     document.getElementById("temp").innerHTML = `${current.temp.toFixed(0)} ${String.fromCharCode(176)}F`
     document.getElementById("wind").innerHTML =`${current["wind_speed"].toFixed(0)} mph, ${current["wind_deg"].toFixed(0)}` + String.fromCharCode(176)
-    document.getElementById("sunrise").innerHTML = getTime(current["sunrise"])
-    document.getElementById("sunset").innerHTML = getTime(current["sunset"])
 
     if (alerts) {
         document.getElementById("alertrow").style.display = "block"
@@ -136,7 +134,7 @@ const fillSingleDay = (oneDay) => {
 const fillDailyData = (data) => {
     const daily = document.getElementById("dailyTable")
     daily.innerHTML = `<h5 class="card-title">Daily Forecast</h5>`
-    const daysData = data.daily.slice(1)
+    const daysData = data.daily
     let newData = ""
     for (let day of daysData) {
         let singleDay = fillSingleDay(day)
