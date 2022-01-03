@@ -62,8 +62,10 @@ const fillSingleHour = (oneHour) => {
         <th scope="row"><span class="bold">${getTimeShort(dt)}</span></th>
         <td>${temp.toFixed(0)} ${String.fromCharCode(176)}F</td>
         <td>
-            <p>${weather[0].main}</p>                                        
-            <img src="/img/icons/${weather[0].icon}.png" alt="weather icon">
+            <p>${weather[0].main}</p>    
+            <div class="imgbgd">                                   
+                <img src="/img/icons/${weather[0].icon}.png" alt="weather icon">
+            </div>
             ${precip}
         </td>
         <td>${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</td>
@@ -103,7 +105,9 @@ const fillSingleDay = (oneDay) => {
     <ul class="list-group list-group-flush">
       <li class="list-group-item">   
         <p>${weather[0].main}</p>                                         
-          <img src="/img/icons/${weather[0].icon}.png" alt="weather icon">
+        <div class="imgbgd">                                  
+            <img src="/img/icons/${weather[0].icon}.png" alt="weather icon">
+        </div>
         ${precip}
     </li>
       <li class="list-group-item"><span class="bold">Sunrise</span>: ${getTime(

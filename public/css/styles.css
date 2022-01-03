@@ -37,3 +37,12 @@ body {
 table {
     border-bottom: hidden;
 }
+
+img {
+    opacity: 1.0;
+}
+
+.imgbgd{
+    /* background-color: lightpink; */
+    background-color:#e5e7e9
+}
