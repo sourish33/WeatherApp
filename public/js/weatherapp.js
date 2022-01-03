@@ -1,5 +1,3 @@
-console.log("weatherapp.js speaking")
-
 const button = document.getElementById("submitBtn")
 const formInput = document.getElementById("formInput")
 const alerttext = document.getElementById("alerttext")
@@ -26,17 +24,10 @@ const fillCurrentData = (data) => {
     document.getElementById("current-location").innerHTML = name
     document.getElementById("lat").innerHTML = lat.toFixed(2)
     document.getElementById("long").innerHTML = long.toFixed(2)
-    document.getElementById(
-        "image"
-    ).src = `http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`
+    document.getElementById("image").src = `http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`
     document.getElementById("desc").innerHTML = current.weather[0].description
-    document.getElementById("temp").innerHTML = `${current.temp.toFixed(
-        0
-    )} ${String.fromCharCode(176)}F`
-    document.getElementById("wind").innerHTML =
-        `${current["wind_speed"].toFixed(0)} mph, ${current["wind_deg"].toFixed(
-            0
-        )}` + String.fromCharCode(176)
+    document.getElementById("temp").innerHTML = `${current.temp.toFixed(0)} ${String.fromCharCode(176)}F`
+    document.getElementById("wind").innerHTML =`${current["wind_speed"].toFixed(0)} mph, ${current["wind_deg"].toFixed(0)}` + String.fromCharCode(176)
     document.getElementById("sunrise").innerHTML = getTime(current["sunrise"])
     document.getElementById("sunset").innerHTML = getTime(current["sunset"])
 
@@ -70,7 +61,7 @@ const fillSingleHour = (oneHour) => {
 </thead>
 <tbody>
     <tr>
-        <th scope="row">${getTimeShort(dt)}</th>
+        <th scope="row"><span class="bold">${getTimeShort(dt)}</span></th>
         <td>${temp.toFixed(0)} ${String.fromCharCode(176)}F</td>
         <td>
             <p>${weather[0].main}</p>                                        
