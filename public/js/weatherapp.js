@@ -118,7 +118,7 @@ const fillDailyData = (response) => {
 
 const handleClick= () =>{
 
-    const loc = formInput.value
+    const loc = formInput.value.trim()
     if (loc.length===0){
         alert("Please enter a location")
         return
@@ -129,6 +129,10 @@ const handleClick= () =>{
     const searchquerry = `http://localhost:3000/weather?address=${encodeURIComponent(loc)}`
     fetch(searchquerry).then((response)=>response.json()).then((response)=>{
         document.getElementById("spinner").style.display="none"
+        if (response.error){
+            alert(`Error: ${response.error}`)
+            return
+        }
         document.getElementById("weatherRow").style.visibility="visible"
         fillCurrentData(response)
         fillHourlyData(response)
@@ -137,9 +141,11 @@ const handleClick= () =>{
 }
 
 const clearData = () =>{
+    formInput.value=""
     document.getElementById("alertrow").style.display="none"
     document.getElementById("weatherRow").style.visibility="hidden"
 
 }
 document.getElementById("submitBtn").addEventListener("click", handleClick)
 document.getElementById("clearBtn").addEventListener("click", clearData)
+clearData()
