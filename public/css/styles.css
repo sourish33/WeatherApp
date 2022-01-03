@@ -1,7 +1,7 @@
 body {
     color: #333333;
     font-family: arial;
-    background: #F6F2D4;
+    background:  #ffce54;
 }
 
 .bold {
@@ -18,18 +18,18 @@ body {
 }
 
 .current {
-    background: #95D1CC;
+    background: #a0d568;
 }
 
 .hourly {
-    background: #5584AC;
+    background: #ac92eb;
 }
 
 
 .daily {
-    background: #95D1CC;
+    background: #4fc1e8;
 }
 
 .list-group-item {
-    background: #95D1CC;
+    background: #4fc1e8;
 }
