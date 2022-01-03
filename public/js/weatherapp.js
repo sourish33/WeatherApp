@@ -35,7 +35,7 @@ const fillCurrentData =(data)=>{
 const fillSingleHour = (oneHour) => {
     const {dt, temp, wind_speed, wind_deg, weather, pop} = oneHour
     const precipProb = parseFloat(pop)*100
-    const precip = precipProb>1 ? `<p>Rain/snow: ${precipProb.toFixed(0)}%</p>`: ``
+    const precip = precipProb>1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>`: ``
     const hourly = document.getElementById("hourlyTable")
     const newData = `
     <thead>
@@ -78,10 +78,10 @@ const fillSingleDay = (oneDay) => {
     // const daily = document.getElementById("dailyTable")
     const {dt, sunrise, sunset, temp, wind_speed, wind_deg, weather, pop} = oneDay
     const precipProb = parseFloat(pop)*100
-    const precip = precipProb>1 ? `<p>Rain/snow: ${precipProb.toFixed(0)}%</p>`: ``
+    const precip = precipProb>1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>`: ``
     const newData = `
     <div class="card mt-4">
-    <div class="card-header bold">
+    <div class="card-header bold daily">
         ${getDateLong(dt)}
     </div>
     <ul class="list-group list-group-flush">

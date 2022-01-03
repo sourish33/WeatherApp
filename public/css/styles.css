@@ -24,3 +24,12 @@ body {
 .hourly {
     background: #5584AC;
 }
+
+
+.daily {
+    background: #95D1CC;
+}
+
+.list-group-item {
+    background: #95D1CC;
+}
