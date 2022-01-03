@@ -148,4 +148,5 @@ const clearData = () =>{
 }
 document.getElementById("submitBtn").addEventListener("click", handleClick)
 document.getElementById("clearBtn").addEventListener("click", clearData)
+document.getElementById("alertCloseButton").addEventListener("click", ()=>{document.getElementById("alertrow").style.display="none"})
 clearData()
