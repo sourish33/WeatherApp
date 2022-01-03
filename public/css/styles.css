@@ -22,7 +22,7 @@ body {
 }
 
 .hourly {
-    background: #ac92eb;
+    background: #4fc1e8;
 }
 
 
@@ -32,4 +32,8 @@ body {
 
 .list-group-item {
     background: #4fc1e8;
+}
+
+table {
+    border-bottom: hidden;
 }

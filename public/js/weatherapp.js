@@ -4,40 +4,62 @@ const button = document.getElementById("submitBtn")
 const formInput = document.getElementById("formInput")
 const alerttext = document.getElementById("alerttext")
 
-const getTime = (dt) => new Date(parseInt(dt)*1000).toLocaleTimeString("en-US")
-const getTimeShort = (dt) => new Date(parseInt(dt)*1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-const getDate = (dt) => new Date(parseInt(dt)*1000).toLocaleDateString("en-US")
-const getDateLong = (dt) => new Date(parseInt(dt)*1000).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+const getTime = (dt) =>
+    new Date(parseInt(dt) * 1000).toLocaleTimeString("en-US")
+const getTimeShort = (dt) =>
+    new Date(parseInt(dt) * 1000).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+    })
+const getDate = (dt) =>
+    new Date(parseInt(dt) * 1000).toLocaleDateString("en-US")
+const getDateLong = (dt) =>
+    new Date(parseInt(dt) * 1000).toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    })
 
-
-const fillCurrentData =(data)=>{
-    const { lat, long, current, hourly, daily, alerts, name }= data
-    document.getElementById("current-location").innerHTML=name
-    document.getElementById("lat").innerHTML=lat.toFixed(2)
-    document.getElementById("long").innerHTML=long.toFixed(2)
-    document.getElementById("image").src=`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`
-    document.getElementById("desc").innerHTML=current.weather[0].description
-    document.getElementById("temp").innerHTML=`${current.temp.toFixed(0)} ${String.fromCharCode(176)}F`
-    document.getElementById("wind").innerHTML=`${current["wind_speed"].toFixed(0)} mph, ${current["wind_deg"].toFixed(0)}`+String.fromCharCode(176)
-    document.getElementById("sunrise").innerHTML=getTime(current["sunrise"])
-    document.getElementById("sunset").innerHTML=getTime(current["sunset"])
+const fillCurrentData = (data) => {
+    const { lat, long, current, hourly, daily, alerts, name } = data
+    document.getElementById("current-location").innerHTML = name
+    document.getElementById("lat").innerHTML = lat.toFixed(2)
+    document.getElementById("long").innerHTML = long.toFixed(2)
+    document.getElementById(
+        "image"
+    ).src = `http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`
+    document.getElementById("desc").innerHTML = current.weather[0].description
+    document.getElementById("temp").innerHTML = `${current.temp.toFixed(
+        0
+    )} ${String.fromCharCode(176)}F`
+    document.getElementById("wind").innerHTML =
+        `${current["wind_speed"].toFixed(0)} mph, ${current["wind_deg"].toFixed(
+            0
+        )}` + String.fromCharCode(176)
+    document.getElementById("sunrise").innerHTML = getTime(current["sunrise"])
+    document.getElementById("sunset").innerHTML = getTime(current["sunset"])
 
     if (alerts) {
-        document.getElementById("alertrow").style.display="block"
-        document.getElementById("event").innerHTML=alerts[0].event
-        document.getElementById("startTime").innerHTML=getTime(alerts[0].start)
-        document.getElementById("endTime").innerHTML=getTime(alerts[0].end)
-        document.getElementById("alerttext").innerHTML=alerts[0].description
+        document.getElementById("alertrow").style.display = "block"
+        document.getElementById("event").innerHTML = alerts[0].event
+        document.getElementById("startTime").innerHTML = getTime(
+            alerts[0].start
+        )
+        document.getElementById("endTime").innerHTML = getTime(alerts[0].end)
+        document.getElementById("alerttext").innerHTML = alerts[0].description
     }
-    
 }
 
 const fillSingleHour = (oneHour) => {
-    const {dt, temp, wind_speed, wind_deg, weather, pop} = oneHour
-    const precipProb = parseFloat(pop)*100
-    const precip = precipProb>1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>`: ``
+    const { dt, temp, wind_speed, wind_deg, weather, pop } = oneHour
+    const precipProb = parseFloat(pop) * 100
+    const precip =
+        precipProb > 1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>` : ``
     const hourly = document.getElementById("hourlyTable")
     const newData = `
+    <div class="card mt-4 hourly">
+    <table class="table">
     <thead>
     <tr>
         <th scope="col" class="bold">Time</th>
@@ -51,34 +73,41 @@ const fillSingleHour = (oneHour) => {
         <th scope="row">${getTimeShort(dt)}</th>
         <td>${temp.toFixed(0)} ${String.fromCharCode(176)}F</td>
         <td>                                            
-            <img src="http://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="weather icon">
+            <img src="http://openweathermap.org/img/wn/${
+                weather[0].icon
+            }@2x.png" alt="weather icon">
             <p>${weather[0].main}</p>
             ${precip}
         </td>
         <td>${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</td>
     </tr>
 </tbody>
+</table>
+</div>
     `
     return newData
-
 }
 
-const fillHourlyData = (data) =>{
-    const hourly= document.getElementById("hourlyTable")
-    const nextEightHours = data.hourly.length>8? data.hourly.slice(0, 8) : data.hourly
-    let newData=''
+const fillHourlyData = (data) => {
+    const hourly = document.getElementById("hourlyTable")
+    hourly.innerHTML = `<h5 class="card-title">Hourly Forecast</h5>`
+    const nextEightHours =
+        data.hourly.length > 8 ? data.hourly.slice(0, 8) : data.hourly
+    let newData = ""
     for (let el of nextEightHours) {
         let hourData = fillSingleHour(el)
-        newData+=hourData
+        newData += hourData
     }
-    hourly.innerHTML = newData
+    hourly.innerHTML += newData
 }
 
 const fillSingleDay = (oneDay) => {
     // const daily = document.getElementById("dailyTable")
-    const {dt, sunrise, sunset, temp, wind_speed, wind_deg, weather, pop} = oneDay
-    const precipProb = parseFloat(pop)*100
-    const precip = precipProb>1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>`: ``
+    const { dt, sunrise, sunset, temp, wind_speed, wind_deg, weather, pop } =
+        oneDay
+    const precipProb = parseFloat(pop) * 100
+    const precip =
+        precipProb > 1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>` : ``
     const newData = `
     <div class="card mt-4">
     <div class="card-header bold daily">
@@ -86,67 +115,81 @@ const fillSingleDay = (oneDay) => {
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">                                            
-          <img src="http://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="weather icon">
+          <img src="http://openweathermap.org/img/wn/${
+              weather[0].icon
+          }@2x.png" alt="weather icon">
         <p>${weather[0].main}</p>
         ${precip}
     </li>
-      <li class="list-group-item"><span class="bold">Sunrise</span>: ${getTime(sunrise)}</li>
-      <li class="list-group-item"><span class="bold">Sunset</span>: ${getTime(sunset)}</li>
-      <li class="list-group-item"><span class="bold">High</span>: ${temp.max.toFixed(0)} ${String.fromCharCode(176)}F</li>
-      <li class="list-group-item"><span class="bold">Low</span>: ${temp.min.toFixed(0)} ${String.fromCharCode(176)}F</li>
-      <li class="list-group-item"><span class="bold">Wind</span>: ${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</li>
+      <li class="list-group-item"><span class="bold">Sunrise</span>: ${getTime(
+          sunrise
+      )}</li>
+      <li class="list-group-item"><span class="bold">Sunset</span>: ${getTime(
+          sunset
+      )}</li>
+      <li class="list-group-item"><span class="bold">High</span>: ${temp.max.toFixed(
+          0
+      )} ${String.fromCharCode(176)}F</li>
+      <li class="list-group-item"><span class="bold">Low</span>: ${temp.min.toFixed(
+          0
+      )} ${String.fromCharCode(176)}F</li>
+      <li class="list-group-item"><span class="bold">Wind</span>: ${wind_speed.toFixed(
+          0
+      )} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</li>
     </ul>
   </div>
     `
     return newData
-
 }
 
 const fillDailyData = (data) => {
     const daily = document.getElementById("dailyTable")
     daily.innerHTML = `<h5 class="card-title">Daily Forecast</h5>`
     const daysData = data.daily.slice(1)
-    let newData =''
+    let newData = ""
     for (let day of daysData) {
         let singleDay = fillSingleDay(day)
-        newData+=singleDay
+        newData += singleDay
     }
-    daily.innerHTML+=newData
-
+    daily.innerHTML += newData
 }
 
-const handleClick= () =>{
-
+const handleClick = () => {
     const loc = formInput.value.trim()
-    if (loc.length===0){
+    if (loc.length === 0) {
         alert("Please enter a location")
         return
     }
 
-    document.getElementById("alertrow").style.display="none"
-    document.getElementById("spinner").style.display="block"
-    const searchquerry = `http://localhost:3000/weather?address=${encodeURIComponent(loc)}`
-    fetch(searchquerry).then((response)=>response.json()).then((response)=>{
-        document.getElementById("spinner").style.display="none"
-        const {error, data} = response
-        if (error){
-            alert(`Error: ${error}`)
-            return
-        }
-        document.getElementById("weatherRow").style.visibility="visible"
-        fillCurrentData(data)
-        fillHourlyData(data)
-        fillDailyData(data)
+    document.getElementById("alertrow").style.display = "none"
+    document.getElementById("spinner").style.display = "block"
+    const searchquerry = `http://localhost:3000/weather?address=${encodeURIComponent(
+        loc
+    )}`
+    fetch(searchquerry)
+        .then((response) => response.json())
+        .then((response) => {
+            document.getElementById("spinner").style.display = "none"
+            const { error, data } = response
+            if (error) {
+                alert(`Error: ${error}`)
+                return
+            }
+            document.getElementById("weatherRow").style.visibility = "visible"
+            fillCurrentData(data)
+            fillHourlyData(data)
+            fillDailyData(data)
         })
 }
 
-const clearData = () =>{
-    formInput.value=""
-    document.getElementById("alertrow").style.display="none"
-    document.getElementById("weatherRow").style.visibility="hidden"
-
+const clearData = () => {
+    formInput.value = ""
+    document.getElementById("alertrow").style.display = "none"
+    document.getElementById("weatherRow").style.visibility = "hidden"
 }
 document.getElementById("submitBtn").addEventListener("click", handleClick)
 document.getElementById("clearBtn").addEventListener("click", clearData)
-document.getElementById("alertCloseButton").addEventListener("click", ()=>{document.getElementById("alertrow").style.display="none"})
+document.getElementById("alertCloseButton").addEventListener("click", () => {
+    document.getElementById("alertrow").style.display = "none"
+})
 clearData()
