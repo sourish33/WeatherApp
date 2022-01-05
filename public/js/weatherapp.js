@@ -216,14 +216,23 @@ const options = {
     document.getElementById("spinner").style.display = "block"
   }
   
+  const handleAlertClose = () =>{
+      const alertbtn = document.getElementById("alertCloseButton")
+      const alertbody = document.getElementById("alertbody")
+      if (alertbtn.innerHTML==="Dismiss"){
+            alertbody.style.display="none"
+            alertbtn.innerHTML="Show Alert"
+      } else {
+            alertbody.style.display="block"
+            alertbtn.innerHTML="Dismiss"
+      }
+  }
 
   
 document.getElementById("submitBtn").addEventListener("click", handleClick)
 document.getElementById("clearBtn").addEventListener("click", clearData)
 document.getElementById("useMyLoc").addEventListener('click', autoLocate)
-document.getElementById("alertCloseButton").addEventListener("click", () => {
-    document.getElementById("alertrow").style.display = "none"
-})
+document.getElementById("alertCloseButton").addEventListener("click", handleAlertClose)
 clearData()
 autoLocate()
 
