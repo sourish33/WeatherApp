@@ -61,9 +61,6 @@ const fillSingleHour = (oneHour) => {
                         <th scope="col" class="bold">
                             Weather
                         </th>
-                        <th scope="col" class="bold">
-                            Wind
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,9 +80,6 @@ const fillSingleHour = (oneHour) => {
                                 />
                             </div>
                             ${precip}
-                        </td>
-                        <td>
-                            ${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}
                         </td>
                     </tr>
                 </tbody>
@@ -118,7 +112,7 @@ const fillSingleDay = (oneDay) => {
         // precipProb > 1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>` : ``
     const newData = `
     <div class= "mt-4  col-lg-4 col-md-6 col-sm-12">
-    <div class="card daily">
+    <div class="card shadow daily">
     <div class="card-header bold">
         ${getDateLong(dt)}
     </div>
