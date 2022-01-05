@@ -47,7 +47,7 @@ const fillSingleHour = (oneHour) => {
         // precipProb > 1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>` : ``
     const hourly = document.getElementById("hourlyTable")
     const newData = `
-        <div class="card mt-4 hourly">
+        <div class="card mt-4 hourly col-lg-4">
             <table class="table">
                 <thead>
                     <tr>
@@ -84,8 +84,7 @@ const fillSingleHour = (oneHour) => {
                             ${precip}
                         </td>
                         <td>
-                            ${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}$
-                            {String.fromCharCode(176)}
+                            ${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}
                         </td>
                     </tr>
                 </tbody>
@@ -97,7 +96,7 @@ const fillSingleHour = (oneHour) => {
 
 const fillHourlyData = (data) => {
     const hourly = document.getElementById("hourlyTable")
-    hourly.innerHTML = `<h5 class="card-title">Hourly Forecast</h5>`
+    // hourly.innerHTML = `<h5 class="card-title">Hourly Forecast</h5>`
     const nextEightHours =
         data.hourly.length > 9 ? data.hourly.slice(1, 9) : data.hourly
     let newData = ""
@@ -128,21 +127,11 @@ const fillSingleDay = (oneDay) => {
         </div>
         ${precip}
     </li>
-      <li class="list-group-item"><span class="bold">Sunrise</span>: ${getTime(
-          sunrise
-      )}</li>
-      <li class="list-group-item"><span class="bold">Sunset</span>: ${getTime(
-          sunset
-      )}</li>
-      <li class="list-group-item"><span class="bold">High</span>: ${temp.max.toFixed(
-          0
-      )} ${String.fromCharCode(176)}F</li>
-      <li class="list-group-item"><span class="bold">Low</span>: ${temp.min.toFixed(
-          0
-      )} ${String.fromCharCode(176)}F</li>
-      <li class="list-group-item"><span class="bold">Wind</span>: ${wind_speed.toFixed(
-          0
-      )} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</li>
+      <li class="list-group-item"><span class="bold">Sunrise</span>: ${getTime(sunrise)}</li>
+      <li class="list-group-item"><span class="bold">Sunset</span>: ${getTime(sunset)}</li>
+      <li class="list-group-item"><span class="bold">High</span>: ${temp.max.toFixed(0)} ${String.fromCharCode(176)}F</li>
+      <li class="list-group-item"><span class="bold">Low</span>: ${temp.min.toFixed(0)} ${String.fromCharCode(176)}F</li>
+      <li class="list-group-item"><span class="bold">Wind</span>: ${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)} ${String.fromCharCode(176)}</li>
     </ul>
   </div>
     `
