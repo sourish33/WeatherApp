@@ -92,9 +92,9 @@ const fillSingleHour = (oneHour) => {
 
 const fillHourlyData = (data) => {
     const hourly = document.getElementById("hourlyTable")
-    // hourly.innerHTML = `<h5 class="card-title">Hourly Forecast</h5>`
+    hourly.innerHTML = ``
     const nextEightHours =
-        data.hourly.length > 9 ? data.hourly.slice(1, 9) : data.hourly
+        data.hourly.length > 10 ? data.hourly.slice(1, 10) : data.hourly
     let newData = ""
     for (let el of nextEightHours) {
         let hourData = fillSingleHour(el)
@@ -138,7 +138,7 @@ const fillSingleDay = (oneDay) => {
 
 const fillDailyData = (data) => {
     const daily = document.getElementById("dailyTable")
-    // daily.innerHTML = `<h5 class="card-title">Daily Forecast</h5>`
+    daily.innerHTML = ``
     const daysData = data.daily
     let newData = ""
     for (let day of daysData) {
