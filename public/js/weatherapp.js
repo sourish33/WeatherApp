@@ -47,7 +47,8 @@ const fillSingleHour = (oneHour) => {
         // precipProb > 1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>` : ``
     const hourly = document.getElementById("hourlyTable")
     const newData = `
-        <div class="card mt-4 hourly col-lg-4">
+        <div class= "mt-4  col-lg-4 col-md-6 col-sm-12">
+        <div class="card hourly">
             <table class="table">
                 <thead>
                     <tr>
@@ -89,6 +90,7 @@ const fillSingleHour = (oneHour) => {
                     </tr>
                 </tbody>
             </table>
+        </div>
         </div>
     `
     return newData
