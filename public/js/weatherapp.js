@@ -117,8 +117,9 @@ const fillSingleDay = (oneDay) => {
     const precip = `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>`
         // precipProb > 1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>` : ``
     const newData = `
-    <div class="card mt-4">
-    <div class="card-header bold daily">
+    <div class= "mt-4  col-lg-4 col-md-6 col-sm-12">
+    <div class="card daily">
+    <div class="card-header bold">
         ${getDateLong(dt)}
     </div>
     <ul class="list-group list-group-flush">
@@ -136,13 +137,14 @@ const fillSingleDay = (oneDay) => {
       <li class="list-group-item"><span class="bold">Wind</span>: ${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)} ${String.fromCharCode(176)}</li>
     </ul>
   </div>
+  </div>
     `
     return newData
 }
 
 const fillDailyData = (data) => {
     const daily = document.getElementById("dailyTable")
-    daily.innerHTML = `<h5 class="card-title">Daily Forecast</h5>`
+    // daily.innerHTML = `<h5 class="card-title">Daily Forecast</h5>`
     const daysData = data.daily
     let newData = ""
     for (let day of daysData) {
