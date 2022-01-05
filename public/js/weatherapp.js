@@ -47,32 +47,50 @@ const fillSingleHour = (oneHour) => {
         // precipProb > 1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>` : ``
     const hourly = document.getElementById("hourlyTable")
     const newData = `
-    <div class="card mt-4 hourly">
-    <table class="table">
-    <thead>
-    <tr>
-        <th scope="col" class="bold">Time</th>
-        <th scope="col" class="bold">Temp</th>
-        <th scope="col" class="bold">Weather</th>
-        <th scope="col" class="bold">Wind</th>
-    </tr>
-</thead>
-<tbody>
-    <tr>
-        <th scope="row"><span class="bold">${getTimeShort(dt)}</span></th>
-        <td>${temp.toFixed(0)} ${String.fromCharCode(176)}F</td>
-        <td>
-            <p>${weather[0].main}</p>    
-            <div class="imgbgd">                                   
-                <img src="/img/icons/${weather[0].icon}.png" alt="weather icon">
-            </div>
-            ${precip}
-        </td>
-        <td>${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}${String.fromCharCode(176)}</td>
-    </tr>
-</tbody>
-</table>
-</div>
+        <div class="card mt-4 hourly">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="bold">
+                            Time
+                        </th>
+                        <th scope="col" class="bold">
+                            Temp
+                        </th>
+                        <th scope="col" class="bold">
+                            Weather
+                        </th>
+                        <th scope="col" class="bold">
+                            Wind
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <span class="bold">${getTimeShort(dt)}</span>
+                        </th>
+                        <td>
+                            ${temp.toFixed(0)} ${String.fromCharCode(176)}F
+                        </td>
+                        <td>
+                            <p>${weather[0].main}</p>
+                            <div class="imgbgd">
+                                <img
+                                    src="/img/icons/${weather[0].icon}.png"
+                                    alt="weather icon"
+                                />
+                            </div>
+                            ${precip}
+                        </td>
+                        <td>
+                            ${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)}$
+                            {String.fromCharCode(176)}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     `
     return newData
 }
