@@ -1,6 +1,8 @@
 const button = document.getElementById("submitBtn")
 const formInput = document.getElementById("formInput")
 const alerttext = document.getElementById("alerttext")
+const alertbtn = document.getElementById("alertCloseButton")
+const alertbody = document.getElementById("alertbody")
 
 const getTime = (dt) =>
     new Date(parseInt(dt) * 1000).toLocaleTimeString("en-US")
@@ -159,6 +161,8 @@ const processData = (searchquerry) =>{
             return
         }
         document.getElementById("currentWeatherRow").style.visibility = "visible"
+        alertbtn.innerHTML="Dismiss"
+        alertbody.style.display="block"
         fillCurrentData(data)
         fillHourlyData(data)
         fillDailyData(data)
@@ -183,6 +187,8 @@ const clearData = () => {
     formInput.value = ""
     document.getElementById("alertrow").style.display = "none"
     document.getElementById("currentWeatherRow").style.visibility = "hidden"
+    alertbtn.innerHTML="Dismiss"
+
 }
 
 const options = {
@@ -207,12 +213,11 @@ const options = {
 
   const autoLocate = () =>{
     navigator.geolocation.getCurrentPosition(success, error, options);
+    document.getElementById("alertrow").style.display = "none"
     document.getElementById("spinner").style.display = "block"
   }
   
   const handleAlertClose = () =>{
-      const alertbtn = document.getElementById("alertCloseButton")
-      const alertbody = document.getElementById("alertbody")
       if (alertbtn.innerHTML==="Dismiss"){
             alertbody.style.display="none"
             alertbtn.innerHTML="Show Alert"

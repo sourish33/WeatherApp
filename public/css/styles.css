@@ -13,6 +13,10 @@ body {
     background: #22577E;
 }
 
+.navbartext {
+    font-size: 2em;
+}
+
 .white-text {
     color:white
 }
