@@ -153,7 +153,7 @@ const processData = (searchquerry) =>{
             alert(`Error: ${error}`)
             return
         }
-        document.getElementById("weatherRow").style.visibility = "visible"
+        document.getElementById("currentWeatherRow").style.visibility = "visible"
         fillCurrentData(data)
         fillHourlyData(data)
         fillDailyData(data)
@@ -177,7 +177,7 @@ const handleClick = () => {
 const clearData = () => {
     formInput.value = ""
     document.getElementById("alertrow").style.display = "none"
-    document.getElementById("weatherRow").style.visibility = "hidden"
+    document.getElementById("currentWeatherRow").style.visibility = "hidden"
 }
 
 const options = {
