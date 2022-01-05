@@ -43,7 +43,7 @@ const fillCurrentData = (data) => {
 const fillSingleHour = (oneHour) => {
     const { dt, temp, wind_speed, wind_deg, weather, pop } = oneHour
     const precipProb = parseFloat(pop) * 100
-    const precip = `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>`
+    const precip = `<p>Precipitation chance: ${precipProb.toFixed(0)}%</p>`
         // precipProb > 1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>` : ``
     const hourly = document.getElementById("hourlyTable")
     const newData = `
@@ -108,7 +108,7 @@ const fillSingleDay = (oneDay) => {
     const { dt, sunrise, sunset, temp, wind_speed, wind_deg, weather, pop } =
         oneDay
     const precipProb = parseFloat(pop) * 100
-    const precip = `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>`
+    const precip = `<p>Precipitation chance: ${precipProb.toFixed(0)}%</p>`
         // precipProb > 1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>` : ``
     const newData = `
     <div class= "mt-4  col-lg-4 col-md-6 col-sm-12">
