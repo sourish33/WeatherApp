@@ -3,8 +3,10 @@ const formInput = document.getElementById("formInput")
 const alerttext = document.getElementById("alerttext")
 const alertbtn = document.getElementById("alertCloseButton")
 const alertbody = document.getElementById("alertbody")
-const toggleHourlyButton = document.getElementById("hourly-forecast-button")
-const toggleDailyButton = document.getElementById("daily-forecast-button")
+const hourlyButton = document.getElementById("hourly-forecast-button")
+const dailyButton = document.getElementById("daily-forecast-button")
+const dailyForecastBody = document.getElementById("daily-forecast-container")
+const hourlyForecastBody = document.getElementById("hourly-forecast-container")
 
 const getTime = (dt) =>
     new Date(parseInt(dt) * 1000).toLocaleTimeString("en-US")
@@ -230,12 +232,23 @@ const options = {
   }
 
   const toggleHourly = () =>{
-      console.log("Hourly clicked")
-
+      if (hourlyButton.innerHTML==="Expand"){
+            hourlyButton.innerHTML="Collapse"
+            hourlyForecastBody.style.display = "block"
+      } else{
+        hourlyButton.innerHTML="Expand"
+        hourlyForecastBody.style.display = "none"
+      }
   }
 
   const toggleDaily = () => {
-    console.log("Daily clicked")
+    if (dailyButton.innerHTML==="Expand"){
+          dailyButton.innerHTML="Collapse"
+          dailyForecastBody.style.display = "block"
+    } else{
+      dailyButton.innerHTML="Expand"
+      dailyForecastBody.style.display = "none"
+    }
   }
 
   
@@ -243,8 +256,8 @@ document.getElementById("submitBtn").addEventListener("click", handleClick)
 document.getElementById("clearBtn").addEventListener("click", clearData)
 document.getElementById("useMyLoc").addEventListener('click', autoLocate)
 alertbtn.addEventListener("click", handleAlertClose)
-toggleHourlyButton.addEventListener("click", toggleHourly)
-toggleDailyButton.addEventListener("click", toggleDaily)
+hourlyButton.addEventListener("click", toggleHourly)
+dailyButton.addEventListener("click", toggleDaily)
 clearData()
 autoLocate()
 
