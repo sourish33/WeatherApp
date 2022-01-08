@@ -24,9 +24,16 @@ const getDateLong = (dt) =>
         month: "long",
         day: "numeric",
     })
+const convertPressure = (hpa) =>{
+    const p = parseFloat(hpa)
+    const cmHg = p*.075
+    const atm = p*0.0009869233
+    return [cmHg.toFixed(2), atm.toFixed(2)]
+}
 
 const fillCurrentData = (data) => {
     const { lat, long, current, hourly, daily, alerts, name } = data
+    const [cmHg, atm] = convertPressure(current.pressure)
     document.getElementById("current-location").innerHTML = name
     document.getElementById("lat").innerHTML = lat.toFixed(2)
     document.getElementById("long").innerHTML = long.toFixed(2)
@@ -34,6 +41,8 @@ const fillCurrentData = (data) => {
     document.getElementById("desc").innerHTML = current.weather[0].description
     document.getElementById("temp").innerHTML = `${current.temp.toFixed(0)} ${String.fromCharCode(176)}F`
     document.getElementById("wind").innerHTML =`${current["wind_speed"].toFixed(0)} mph, ${current["wind_deg"].toFixed(0)}` + String.fromCharCode(176)
+    document.getElementById("pressure").innerHTML =`${cmHg} cmHg (${atm} atm)`
+    document.getElementById("humidity").innerHTML =`${current["humidity"].toFixed(0)}%`
 
     if (alerts) {
         document.getElementById("alertrow").style.display = "block"
