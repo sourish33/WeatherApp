@@ -10,18 +10,19 @@ const dailyForecastBody = document.getElementById("daily-forecast-container")
 const hourlyForecastBody = document.getElementById("hourly-forecast-container")
 
 const aqiColors = {
-    "Good" : '#00e400',
-    "Moderate": '#ff7e00',
-    "Unhealthy for Sensitive Grps": '#ff7e00',
-    "Unhealthy": '#8f3f97',
-    "Very Unhealthy": '#8f3f97',
-    "Hazardous": '#ff7e00'
+    "Good" : 'aqiGood',
+    "Moderate": 'aqiMod',
+    "Unhealthy for Sensitive Grps": 'aqiUnh1',
+    "Unhealthy": 'aqiUnh2',
+    "Very Unhealthy": 'aqiUnh3',
+    "Hazardous":'aquiHaz'
 }
 
 
 const fillCurrentData = (data) => {
     const { lat, long, current, hourly, daily, alerts, name, aqi } = data
     const [cmHg, atm] = convertPressure(current.pressure)
+    const aqilevel = aqiDangerLevel(aqi)
     document.getElementById("current-location").innerHTML = name
     document.getElementById("lat").innerHTML = lat.toFixed(2)
     document.getElementById("long").innerHTML = long.toFixed(2)
@@ -30,7 +31,7 @@ const fillCurrentData = (data) => {
     document.getElementById("temp").innerHTML = `${current.temp.toFixed(0)} ${String.fromCharCode(176)}F`
     document.getElementById("wind").innerHTML =`${current["wind_speed"].toFixed(0)} mph, ${current["wind_deg"].toFixed(0)}` + String.fromCharCode(176)
     document.getElementById("pressure").innerHTML =`${cmHg} cmHg (${atm} atm)`
-    document.getElementById("aqi").innerHTML = `${aqi}, ${aqiDangerLevel(aqi)}`
+    document.getElementById("aqi").innerHTML = `<p class="${aqiColors[aqilevel]} aqi-para">${aqi}, ${aqilevel}</p>`
     document.getElementById("humidity").innerHTML =`${current["humidity"].toFixed(0)}%`
 
     if (alerts) {

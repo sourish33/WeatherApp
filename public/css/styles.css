@@ -50,3 +50,37 @@ img {
     /* background-color: lightpink; */
     background-color:#e5e7e9
 }
+
+.aqiGood {
+    background: #00e400;
+    color: black;
+}
+
+.aqiMod {
+    background: #ffff00;
+    color:black;
+}
+
+.aqiUnh1 {
+    background: #ff7e00;
+    color:white;
+}
+
+.aqiUnh2 {
+    background: #ff0000;
+    color:white;
+}
+
+.aqiUnh3 {
+    background: #8f3f97;
+    color:white;
+}
+
+.aquiHaz {
+    background: #7e0023;
+    color: white
+}
+
+.aqi-para {
+    border-radius: 10px;
+}
