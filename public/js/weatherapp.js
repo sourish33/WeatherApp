@@ -9,24 +9,13 @@ const dailyButton = document.getElementById("daily-forecast-button")
 const dailyForecastBody = document.getElementById("daily-forecast-container")
 const hourlyForecastBody = document.getElementById("hourly-forecast-container")
 
-const aqiColors = {
-    "Good" : 'aqiGood',
-    "Moderate": 'aqiMod',
-    "Unhealthy for Sensitive Grps": 'aqiUnh1',
-    "Unhealthy": 'aqiUnh2',
-    "Very Unhealthy": 'aqiUnh3',
-    "Hazardous":'aquiHaz'
-}
-
-const dirs = {
-
-}
 
 
 const fillCurrentData = (data) => {
     const { lat, long, current, hourly, daily, alerts, name, aqi } = data
     const [cmHg, atm] = convertPressure(current.pressure)
     const aqilevel = aqiDangerLevel(aqi)
+    const wind = current["wind_speed"] === 0 ? 'None' : `${current["wind_speed"].toFixed(0)} mph, ${dirFromDeg(current["wind_deg"])}`
     console.log(current["wind_deg"])
     document.getElementById("current-location").innerHTML = name
     document.getElementById("lat").innerHTML = lat.toFixed(2)
@@ -34,7 +23,7 @@ const fillCurrentData = (data) => {
     document.getElementById("image").src = `/img/icons/${current.weather[0].icon}.png`
     document.getElementById("desc").innerHTML = current.weather[0].description
     document.getElementById("temp").innerHTML = `${current.temp.toFixed(0)} ${String.fromCharCode(176)}F`
-    document.getElementById("wind").innerHTML =`${current["wind_speed"].toFixed(0)} mph, ${dirFromDeg(current["wind_deg"])}` 
+    document.getElementById("wind").innerHTML = wind
     document.getElementById("pressure").innerHTML =`${cmHg} cmHg (${atm} atm)`
     document.getElementById("aqi").innerHTML = `<p class="${aqiColors[aqilevel]} aqi-para">${aqi}, ${aqilevel}</p>`
     document.getElementById("humidity").innerHTML =`${current["humidity"].toFixed(0)}%`
@@ -119,6 +108,7 @@ const fillSingleDay = (oneDay) => {
     const precipProb = parseFloat(pop) * 100
     const precip = `<p>Precipitation chance: ${precipProb.toFixed(0)}%</p>`
     const [cmHg, atm] = convertPressure(pressure)
+    const wind = wind_speed === 0 ? 'None' : `${wind_speed.toFixed(0)} mph, ${dirFromDeg(wind_deg)}`
     const newData = `
     <div class= "mt-4  col-lg-4 col-md-6 col-sm-12">
     <div class="card shadow daily">
@@ -139,7 +129,7 @@ const fillSingleDay = (oneDay) => {
       <li class="list-group-item"><span class="bold">Low</span>: ${temp.min.toFixed(0)} ${String.fromCharCode(176)}F</li>
       <li class="list-group-item"><span class="bold">Pressure</span>: ${cmHg} cmHg (${atm} atm)</li>
       <li class="list-group-item"><span class="bold">Humidity</span>: ${humidity.toFixed(0)}%</li>
-      <li class="list-group-item"><span class="bold">Wind</span>: ${wind_speed.toFixed(0)} mph, ${dirFromDeg(wind_deg)}</li>
+      <li class="list-group-item"><span class="bold">Wind</span>: ${wind}</li>
 
     </ul>
   </div>

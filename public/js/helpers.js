@@ -21,6 +21,15 @@ const convertPressure = (hpa) =>{
     return [cmHg.toFixed(2), atm.toFixed(2)]
 }
 
+const aqiColors = {
+    "Good" : 'aqiGood',
+    "Moderate": 'aqiMod',
+    "Unhealthy for Sensitive Grps": 'aqiUnh1',
+    "Unhealthy": 'aqiUnh2',
+    "Very Unhealthy": 'aqiUnh3',
+    "Hazardous":'aquiHaz'
+}
+
 const aqiDangerLevel = (aqival) =>{
     const aqi = parseInt(aqival)
     if (aqi<=50) { return "Good"}
@@ -37,7 +46,7 @@ const roundToNearest10 = (num) =>{
 
 const dirFromDeg = (deg) =>{
     let x = roundToNearest10(deg)
-    if ([350,360,10].includes(x)) {return "N"}
+    if ([350,360, 10].includes(x)) {return "N"}
     if ([20,30].includes(x)) {return "N/NE"}
     if ([40,50].includes(x)) {return "NE"}
     if ([60,70].includes(x)) {return "E/NE"}
