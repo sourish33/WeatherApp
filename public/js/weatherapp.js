@@ -120,11 +120,11 @@ const fillHourlyData = (data) => {
 
 const fillSingleDay = (oneDay) => {
     // const daily = document.getElementById("dailyTable")
-    const { dt, sunrise, sunset, temp, wind_speed, wind_deg, weather, pop } =
+    const { dt, sunrise, sunset, temp, wind_speed, wind_deg, weather, pop, pressure, humidity } =
         oneDay
     const precipProb = parseFloat(pop) * 100
     const precip = `<p>Precipitation chance: ${precipProb.toFixed(0)}%</p>`
-        // precipProb > 1 ? `<p>Precip. chance: ${precipProb.toFixed(0)}%</p>` : ``
+    const [cmHg, atm] = convertPressure(pressure)
     const newData = `
     <div class= "mt-4  col-lg-4 col-md-6 col-sm-12">
     <div class="card shadow daily">
@@ -143,7 +143,10 @@ const fillSingleDay = (oneDay) => {
       <li class="list-group-item"><span class="bold">Sunset</span>: ${getTime(sunset)}</li>
       <li class="list-group-item"><span class="bold">High</span>: ${temp.max.toFixed(0)} ${String.fromCharCode(176)}F</li>
       <li class="list-group-item"><span class="bold">Low</span>: ${temp.min.toFixed(0)} ${String.fromCharCode(176)}F</li>
+      <li class="list-group-item"><span class="bold">Pressure</span>: ${cmHg} cmHg (${atm} atm)</li>
+      <li class="list-group-item"><span class="bold">Humidity</span>: ${humidity.toFixed(0)}%</li>
       <li class="list-group-item"><span class="bold">Wind</span>: ${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)} ${String.fromCharCode(176)}</li>
+
     </ul>
   </div>
   </div>
