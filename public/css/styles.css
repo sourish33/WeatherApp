@@ -1,16 +1,16 @@
 body {
     color: #333333;
     font-family: arial;
-    background:  #ffce54;
+    background:  #fdf6c6;
 }
 
 .bold {
     font-weight: bold;
-    color: blue
+    color: #543d34;
 }
 
 .navbarstyle {
-    background: #22577E;
+    background: #543d34;
 }
 
 .navbartext {
@@ -22,20 +22,20 @@ body {
 }
 
 .current {
-    background: #a0d568;
+    background: #569c69;
 }
 
 .hourly {
-    background: #4fc1e8;
+    background: #d0a85f;
 }
 
 
 .daily {
-    background: #4fc1e8;
+    background: #a55b41;
 }
 
 .list-group-item {
-    background: #4fc1e8;
+    background: #a55b41;
 }
 
 table {

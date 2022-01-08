@@ -107,8 +107,11 @@
                 <div class="row g-3" id="hourlyWeatherRow" >
                         <div class="card current shadow">
                             <div class="card-body">
-                                <h5 class="card-title"><span class="bold">Hourly Forecast</span></h5>
-                                <div class="container-fluid">
+                                <h5 class="card-title d-flex justify-content-between align-items-center">
+                                    <span class="bold">Horly Forecast</span>
+                                    <button type="button" class="btn btn-primary" aria-label="Close" id="hourly-forecast-button">Expand</button>
+                                </h5>
+                                <div class="container-fluid" id="hourly-forecast-container" style="display: none;">
                                     <div class="row gx-3" id ="hourlyTable" >
                                          {{!-- Filled by JS --}}
                                     </div>
@@ -119,9 +122,12 @@
                 </div>
                 <div class="row g-3" id="dailyWeatherRow" >
                         <div class="card current shadow">
-                            <div class="card-body current" >
-                                <h5 class="card-title"><span class="bold">Daily Forecast</span></h5>
-                                <div class="container-fluid">
+                            <div class="card-body" >
+                                <h5 class="card-title d-flex justify-content-between align-items-center">
+                                    <span class="bold">Daily Forecast</span>
+                                    <button type="button" class="btn btn-primary" aria-label="Close" id="daily-forecast-button">Expand</button>
+                                </h5>
+                                <div class="container-fluid" id="daily-forecast-container" style="display: none;">
                                     <div class="row gx-3" id ="dailyTable" >
                                          {{!-- Filled by JS --}}
                                     </div>
