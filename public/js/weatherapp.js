@@ -3,6 +3,8 @@ const formInput = document.getElementById("formInput")
 const alerttext = document.getElementById("alerttext")
 const alertbtn = document.getElementById("alertCloseButton")
 const alertbody = document.getElementById("alertbody")
+const toggleHourlyButton = document.getElementById("hourly-forecast-button")
+const toggleDailyButton = document.getElementById("daily-forecast-button")
 
 const getTime = (dt) =>
     new Date(parseInt(dt) * 1000).toLocaleTimeString("en-US")
@@ -227,11 +229,22 @@ const options = {
       }
   }
 
+  const toggleHourly = () =>{
+      console.log("Hourly clicked")
+
+  }
+
+  const toggleDaily = () => {
+    console.log("Daily clicked")
+  }
+
   
 document.getElementById("submitBtn").addEventListener("click", handleClick)
 document.getElementById("clearBtn").addEventListener("click", clearData)
 document.getElementById("useMyLoc").addEventListener('click', autoLocate)
-document.getElementById("alertCloseButton").addEventListener("click", handleAlertClose)
+alertbtn.addEventListener("click", handleAlertClose)
+toggleHourlyButton.addEventListener("click", toggleHourly)
+toggleDailyButton.addEventListener("click", toggleDaily)
 clearData()
 autoLocate()
 
