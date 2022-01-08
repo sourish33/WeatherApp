@@ -1,11 +1,12 @@
 const path = require("path")
 const express = require("express")
 const hbs = require("hbs")
+const request = require("postman-request")
 
 
-const { geocode } = require("./utils/geocode")
+// const { geocode } = require("./utils/geocode")
 const { forecast } = require("./utils/forecast")
-const {getloc} = require('./utils/getloc')
+// const {getloc} = require('./utils/getloc')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -45,7 +46,30 @@ app.get("/help", (req, res) => {
     })
 })
 
-app.get("/weather", (req, res) => {
+const geocode = (address) => {
+    console.log(address)
+    const addr = encodeURIComponent(address)
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${addr}.json?access_token=pk.eyJ1Ijoic291cmlzaDMzIiwiYSI6ImNreG5oN2M4NjZhem8zMW11emwxeTNxNTUifQ.aGPirHsIa1WdNXe4TwoE-g&limit=1`
+    
+    return new Promise((resolve, reject) =>{
+        request({ url: url, json: true }, (err, { body }) => {
+            if (err) {
+                reject("Connection failed")
+            } else if (body.features.length === 0) {
+                reject("Nothing returned. Try a different location")
+            } else {
+                const data = {}
+                data.name = body.features[0].place_name
+                data.lat = body.features[0].center[1]
+                data.long = body.features[0].center[0]
+                resolve(data)
+            }
+        })
+        
+    })
+}
+
+app.get("/weather",  async (req, res) => {
     if (!req.query.address) {
         res.send({
             error: "Address must be provided",
@@ -53,26 +77,38 @@ app.get("/weather", (req, res) => {
         })
         return
     }
-    geocode(req.query.address, (error, { lat, long, name }={}) => {
-        if (error) {
-            return res.send({ error: error, data: null })
-        } 
-        forecast(lat, long, (error, forecastRes) => {
-            if (error) {
-                return res.send({ error: error, data: null })
-            } else {
-                const location = req.query.address
-                const { lat, long, current, hourly, daily, alerts } = forecastRes
-                forecastRes.name = name
-                res.send({
-                    error: null,
-                    data: forecastRes
-                    // address: req.query.address,
-                })
-            }
+    try {
+        const geodata = await geocode(req.query.address)
+        res.send({
+                error: null,
+                data: geodata
         })
-
+    } catch(err) {
+        res.send({
+            error: err,
+            data: null
     })
+    }
+    // geocode(req.query.address, (error, { lat, long, name }={}) => {
+    //     if (error) {
+    //         return res.send({ error: error, data: null })
+    //     } 
+    //     forecast(lat, long, (error, forecastRes) => {
+    //         if (error) {
+    //             return res.send({ error: error, data: null })
+    //         } else {
+    //             const location = req.query.address
+    //             const { lat, long, current, hourly, daily, alerts } = forecastRes
+    //             forecastRes.name = name
+    //             res.send({
+    //                 error: null,
+    //                 data: forecastRes
+    //                 // address: req.query.address,
+    //             })
+    //         }
+    //     })
+
+    // })
 })
 
 app.get("/coords", (req, res) =>{
