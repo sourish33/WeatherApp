@@ -167,18 +167,7 @@ const processData = (searchquerry) =>{
 
 }
 
-const handleClick = () => {
-    const loc = formInput.value.trim()
-    if (loc.length === 0) {
-        alert("Please enter a location")
-        return
-    }
 
-    document.getElementById("alertrow").style.display = "none"
-    document.getElementById("spinner").style.display = "block"
-    const searchquerry = `/weather?address=${encodeURIComponent(loc)}`
-    processData(searchquerry)
-}
 
 const clearData = () => {
     formInput.value = ""
@@ -187,7 +176,7 @@ const clearData = () => {
     alertbtn.innerHTML="Dismiss"
 
 }
-
+//AUTO LOCATE FUNCTIONS////////////////////////////////////////////////////
 const autolocateOptions = {
     enableHighAccuracy: true,
     timeout: 5000,
@@ -213,6 +202,8 @@ const autolocateOptions = {
     document.getElementById("alertrow").style.display = "none"
     document.getElementById("spinner").style.display = "block"
   }
+
+  /////CLICK HANDLERS?????????????????????????????????????????
   
   const handleAlertClose = () =>{
       if (alertbtn.innerHTML==="Dismiss"){
@@ -244,8 +235,21 @@ const autolocateOptions = {
     }
   }
 
+  const handleClickSubmit = () => {
+    const loc = formInput.value.trim()
+    if (loc.length === 0) {
+        alert("Please enter a location")
+        return
+    }
+
+    document.getElementById("alertrow").style.display = "none"
+    document.getElementById("spinner").style.display = "block"
+    const searchquerry = `/weather?address=${encodeURIComponent(loc)}`
+    processData(searchquerry)
+}
+
   
-document.getElementById("submitBtn").addEventListener("click", handleClick)
+document.getElementById("submitBtn").addEventListener("click", handleClickSubmit)
 document.getElementById("clearBtn").addEventListener("click", clearData)
 document.getElementById("useMyLoc").addEventListener('click', autoLocate)
 alertbtn.addEventListener("click", handleAlertClose)
