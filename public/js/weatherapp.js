@@ -18,18 +18,23 @@ const aqiColors = {
     "Hazardous":'aquiHaz'
 }
 
+const dirs = {
+
+}
+
 
 const fillCurrentData = (data) => {
     const { lat, long, current, hourly, daily, alerts, name, aqi } = data
     const [cmHg, atm] = convertPressure(current.pressure)
     const aqilevel = aqiDangerLevel(aqi)
+    console.log(current["wind_deg"])
     document.getElementById("current-location").innerHTML = name
     document.getElementById("lat").innerHTML = lat.toFixed(2)
     document.getElementById("long").innerHTML = long.toFixed(2)
     document.getElementById("image").src = `/img/icons/${current.weather[0].icon}.png`
     document.getElementById("desc").innerHTML = current.weather[0].description
     document.getElementById("temp").innerHTML = `${current.temp.toFixed(0)} ${String.fromCharCode(176)}F`
-    document.getElementById("wind").innerHTML =`${current["wind_speed"].toFixed(0)} mph, ${current["wind_deg"].toFixed(0)}` + String.fromCharCode(176)
+    document.getElementById("wind").innerHTML =`${current["wind_speed"].toFixed(0)} mph, ${dirFromDeg(current["wind_deg"])}` 
     document.getElementById("pressure").innerHTML =`${cmHg} cmHg (${atm} atm)`
     document.getElementById("aqi").innerHTML = `<p class="${aqiColors[aqilevel]} aqi-para">${aqi}, ${aqilevel}</p>`
     document.getElementById("humidity").innerHTML =`${current["humidity"].toFixed(0)}%`
@@ -110,8 +115,7 @@ const fillHourlyData = (data) => {
 
 const fillSingleDay = (oneDay) => {
     // const daily = document.getElementById("dailyTable")
-    const { dt, sunrise, sunset, temp, wind_speed, wind_deg, weather, pop, pressure, humidity } =
-        oneDay
+    const { dt, sunrise, sunset, temp, wind_speed, wind_deg, weather, pop, pressure, humidity } = oneDay
     const precipProb = parseFloat(pop) * 100
     const precip = `<p>Precipitation chance: ${precipProb.toFixed(0)}%</p>`
     const [cmHg, atm] = convertPressure(pressure)
@@ -135,7 +139,7 @@ const fillSingleDay = (oneDay) => {
       <li class="list-group-item"><span class="bold">Low</span>: ${temp.min.toFixed(0)} ${String.fromCharCode(176)}F</li>
       <li class="list-group-item"><span class="bold">Pressure</span>: ${cmHg} cmHg (${atm} atm)</li>
       <li class="list-group-item"><span class="bold">Humidity</span>: ${humidity.toFixed(0)}%</li>
-      <li class="list-group-item"><span class="bold">Wind</span>: ${wind_speed.toFixed(0)} mph, ${wind_deg.toFixed(0)} ${String.fromCharCode(176)}</li>
+      <li class="list-group-item"><span class="bold">Wind</span>: ${wind_speed.toFixed(0)} mph, ${dirFromDeg(wind_deg)}</li>
 
     </ul>
   </div>
