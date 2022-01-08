@@ -8,6 +8,7 @@ const { geocode } = require("./utils/geocode")
 const { forecast } = require("./utils/forecast")
 // const { resolve } = require("path")
 const {getloc} = require('./utils/getloc')
+const {getaqi} = require('./utils/getaqi')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -63,8 +64,9 @@ app.get("/weather",  async (req, res) => {
     }
     try {
         const {name, lat, long} = await geocode(req.query.address)
-        const forecastRes = await forecast(lat, long)
+        const [forecastRes, aqi] = await Promise.all([forecast(lat, long), getaqi(lat, long)])
         forecastRes.name = name
+        forecastRes.aqi = aqi
         res.send({
                 error: null,
                 data: forecastRes,
