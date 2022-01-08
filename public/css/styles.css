@@ -10,7 +10,7 @@ body {
 }
 
 .navbarstyle {
-    background: #543d34;
+    background: #22577e;
 }
 
 .navbartext {
@@ -22,7 +22,7 @@ body {
 }
 
 .current {
-    background: #569c69;
+    background: #a0d568;
 }
 
 .hourly {
@@ -31,11 +31,11 @@ body {
 
 
 .daily {
-    background: #a55b41;
+    background: #d0a85f;
 }
 
 .list-group-item {
-    background: #a55b41;
+    background: #d0a85f;
 }
 
 table {
