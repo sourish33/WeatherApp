@@ -69,6 +69,22 @@ const geocode = (address) => {
     })
 }
 
+const getloc = (LAT, LNG) => {
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${LAT}+${LNG}&key=5f8b51c4764c44828869f238f28c0aa3`
+    return new Promise((resolve, reject)=>{
+        request({ url: url, json: true }, (err, {body}) => {
+            if (err) {
+                reject("Check your internet connection")
+            } else if (body.length === 0) {
+                reject("Geolocation failed")
+            } else {
+                resolve(body.results[0].formatted)
+            }
+        })
+
+    })
+}
+
 const forecast = (lat, long) => {
     const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely&appid=0edf04cd12cd717d3c62ff12f3b844ea&units=imperial`
     return new Promise((resolve, reject) =>{
@@ -112,53 +128,32 @@ app.get("/weather",  async (req, res) => {
         res.send({
             error: err,
             data: null
-    })
+        })
     }
-    // geocode(req.query.address, (error, { lat, long, name }={}) => {
-    //     if (error) {
-    //         return res.send({ error: error, data: null })
-    //     } 
-    //     forecast(lat, long, (error, forecastRes) => {
-    //         if (error) {
-    //             return res.send({ error: error, data: null })
-    //         } else {
-    //             const location = req.query.address
-    //             const { lat, long, current, hourly, daily, alerts } = forecastRes
-    //             forecastRes.name = name
-    //             res.send({
-    //                 error: null,
-    //                 data: forecastRes
-    //                 // address: req.query.address,
-    //             })
-    //         }
-    //     })
-
-    // })
 })
 
-app.get("/coords", (req, res) =>{
+app.get("/coords", async (req, res) =>{
     if (!req.query.lat || !req.query.long) {
         return res.send({error: "Invalid Lat/Long", data: null})
     }
-    const LAT = req.query.lat
-    const LNG = req.query.long
-    getloc(LAT, LNG, (err, LAT, LNG, {name})=>{
-        if (err){
-            return console.log("Geolocation failed")
-        }
-        forecast(LAT, LNG, (error, forecastRes) => {
-            if (error) {
-                return res.send({ error: error, data: null })
-            } else {
-                const { lat, long, current, hourly, daily, alerts } = forecastRes
-                forecastRes.name = name
-                res.send({
-                    error: null,
-                    data: forecastRes,
-                })
-            }
+    const lat = req.query.lat
+    const long = req.query.long
+    try {
+        const name = await getloc(lat, long)
+        const forecastRes = await forecast(lat, long)
+        forecastRes.name = name
+        res.send({
+            error: null,
+            data: forecastRes,
         })
-    })
+    } catch(err){
+        res.send({
+            error: err,
+            data: null
+        })
+
+    }
+
 })
 
 
