@@ -87,8 +87,9 @@ app.get("/coords", async (req, res) =>{
     const long = req.query.long
     try {
         const name = await getloc(lat, long)
-        const forecastRes = await forecast(lat, long)
+        const [forecastRes, aqi] = await Promise.all([forecast(lat, long), getaqi(lat, long)])
         forecastRes.name = name
+        forecastRes.aqi = aqi
         res.send({
             error: null,
             data: forecastRes,
