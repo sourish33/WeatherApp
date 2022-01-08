@@ -32,25 +32,6 @@ app.get("", (req, res) => {
     })
 })
 
-app.get("/about", (req, res) => {
-    res.render("about", {
-        title: "About Me",
-        name: "Sourish Dutta",
-        footerText: "Created by Sourish Dutta",
-    })
-})
-
-app.get("/help", (req, res) => {
-    res.render("help", {
-        helpText: "This is some helpful text.",
-        title: "Help",
-        footerText: "Created by Sourish Dutta",
-    })
-})
-
-
-
-
 
 
 
