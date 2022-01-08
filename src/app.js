@@ -4,10 +4,10 @@ const hbs = require("hbs")
 const request = require("postman-request")
 
 
-// const { geocode } = require("./utils/geocode")
-// const { forecast } = require("./utils/forecast")
-const { resolve } = require("path")
-// const {getloc} = require('./utils/getloc')
+const { geocode } = require("./utils/geocode")
+const { forecast } = require("./utils/forecast")
+// const { resolve } = require("path")
+const {getloc} = require('./utils/getloc')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -47,66 +47,11 @@ app.get("/help", (req, res) => {
     })
 })
 
-const geocode = (address) => {
-    const addr = encodeURIComponent(address)
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${addr}.json?access_token=pk.eyJ1Ijoic291cmlzaDMzIiwiYSI6ImNreG5oN2M4NjZhem8zMW11emwxeTNxNTUifQ.aGPirHsIa1WdNXe4TwoE-g&limit=1`
-    
-    return new Promise((resolve, reject) =>{
-        request({ url: url, json: true }, (err, { body }) => {
-            if (err) {
-                reject("Connection failed")
-            } else if (body.features.length === 0) {
-                reject("Nothing returned. Try a different location")
-            } else {
-                const data = {}
-                data.name = body.features[0].place_name
-                data.lat = body.features[0].center[1]
-                data.long = body.features[0].center[0]
-                resolve(data)
-            }
-        })
-        
-    })
-}
 
-const getloc = (LAT, LNG) => {
-    const url = `https://api.opencagedata.com/geocode/v1/json?q=${LAT}+${LNG}&key=5f8b51c4764c44828869f238f28c0aa3`
-    return new Promise((resolve, reject)=>{
-        request({ url: url, json: true }, (err, {body}) => {
-            if (err) {
-                reject("Check your internet connection")
-            } else if (body.length === 0) {
-                reject("Geolocation failed")
-            } else {
-                resolve(body.results[0].formatted)
-            }
-        })
 
-    })
-}
 
-const forecast = (lat, long) => {
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely&appid=0edf04cd12cd717d3c62ff12f3b844ea&units=imperial`
-    return new Promise((resolve, reject) =>{
-        request({ url: url, json: true }, (err, { body }) => {
-            if (err) {
-                reject("Check your internet connection")
-            } else if (body.error) {
-                reject(body.error.info)
-            } else {
-                const data = {}
-                data.lat = body.lat
-                data.long = body.lon
-                data.current = body.current
-                data.hourly = body.hourly
-                data.daily = body.daily
-                data.alerts = body.alerts? body.alerts : null
-                resolve(data)
-            }
-        })
-    })
 
-}
+
 
 app.get("/weather",  async (req, res) => {
     if (!req.query.address) {
@@ -160,8 +105,6 @@ app.get("/coords", async (req, res) =>{
 
 app.get("*", (req, res) => {
     res.render("404", {
-        title: "404",
-        name: "Sourish Dutta",
         errorMessage: "Page not found.",
     })
 })
