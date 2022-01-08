@@ -1,4 +1,3 @@
-// import {getTime, getTimeShort, getDate, getDateLong, convertPressure} from `js/helpers`
 
 const button = document.getElementById("submitBtn")
 const formInput = document.getElementById("formInput")
@@ -9,6 +8,15 @@ const hourlyButton = document.getElementById("hourly-forecast-button")
 const dailyButton = document.getElementById("daily-forecast-button")
 const dailyForecastBody = document.getElementById("daily-forecast-container")
 const hourlyForecastBody = document.getElementById("hourly-forecast-container")
+
+const aqiColors = {
+    "Good" : '#00e400',
+    "Moderate": '#ff7e00',
+    "Unhealthy for Sensitive Grps": '#ff7e00',
+    "Unhealthy": '#8f3f97',
+    "Very Unhealthy": '#8f3f97',
+    "Hazardous": '#ff7e00'
+}
 
 
 const fillCurrentData = (data) => {
@@ -22,7 +30,7 @@ const fillCurrentData = (data) => {
     document.getElementById("temp").innerHTML = `${current.temp.toFixed(0)} ${String.fromCharCode(176)}F`
     document.getElementById("wind").innerHTML =`${current["wind_speed"].toFixed(0)} mph, ${current["wind_deg"].toFixed(0)}` + String.fromCharCode(176)
     document.getElementById("pressure").innerHTML =`${cmHg} cmHg (${atm} atm)`
-    document.getElementById("aqi").innerHTML = aqi
+    document.getElementById("aqi").innerHTML = `${aqi}, ${aqiDangerLevel(aqi)}`
     document.getElementById("humidity").innerHTML =`${current["humidity"].toFixed(0)}%`
 
     if (alerts) {
