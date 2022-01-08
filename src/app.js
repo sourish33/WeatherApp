@@ -5,7 +5,8 @@ const request = require("postman-request")
 
 
 // const { geocode } = require("./utils/geocode")
-const { forecast } = require("./utils/forecast")
+// const { forecast } = require("./utils/forecast")
+const { resolve } = require("path")
 // const {getloc} = require('./utils/getloc')
 
 const app = express()
@@ -47,7 +48,6 @@ app.get("/help", (req, res) => {
 })
 
 const geocode = (address) => {
-    console.log(address)
     const addr = encodeURIComponent(address)
     const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${addr}.json?access_token=pk.eyJ1Ijoic291cmlzaDMzIiwiYSI6ImNreG5oN2M4NjZhem8zMW11emwxeTNxNTUifQ.aGPirHsIa1WdNXe4TwoE-g&limit=1`
     
@@ -69,6 +69,29 @@ const geocode = (address) => {
     })
 }
 
+const forecast = (lat, long) => {
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely&appid=0edf04cd12cd717d3c62ff12f3b844ea&units=imperial`
+    return new Promise((resolve, reject) =>{
+        request({ url: url, json: true }, (err, { body }) => {
+            if (err) {
+                reject("Check your internet connection")
+            } else if (body.error) {
+                reject(body.error.info)
+            } else {
+                const data = {}
+                data.lat = body.lat
+                data.long = body.lon
+                data.current = body.current
+                data.hourly = body.hourly
+                data.daily = body.daily
+                data.alerts = body.alerts? body.alerts : null
+                resolve(data)
+            }
+        })
+    })
+
+}
+
 app.get("/weather",  async (req, res) => {
     if (!req.query.address) {
         res.send({
@@ -78,10 +101,12 @@ app.get("/weather",  async (req, res) => {
         return
     }
     try {
-        const geodata = await geocode(req.query.address)
+        const {name, lat, long} = await geocode(req.query.address)
+        const forecastRes = await forecast(lat, long)
+        forecastRes.name = name
         res.send({
                 error: null,
-                data: geodata
+                data: forecastRes,
         })
     } catch(err) {
         res.send({
