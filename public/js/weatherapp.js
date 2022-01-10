@@ -177,6 +177,7 @@ const clearData = () => {
     document.getElementById("alertrow").style.display = "none"
     document.getElementById("currentWeatherRow").style.visibility = "hidden"
     alertbtn.innerHTML="Dismiss"
+    document.getElementById("spinner").style.display = "none"
 
 }
 //AUTO LOCATE FUNCTIONS////////////////////////////////////////////////////
@@ -259,5 +260,5 @@ alertbtn.addEventListener("click", handleAlertClose)
 hourlyButton.addEventListener("click", toggleHourly)
 dailyButton.addEventListener("click", toggleDaily)
 clearData()
-autoLocate()
+// autoLocate()
 
