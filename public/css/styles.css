@@ -88,3 +88,19 @@ img {
 .alertcard {
     background: lightpink;
 }
+
+.shorttext {
+    display: none;
+  }
+.longtext {
+      display: block;
+    }
+
+@media (max-width: 767.98px) {
+    .longtext {
+      display: none;
+    }
+    .shorttext {
+        display: block;
+      }
+  }
