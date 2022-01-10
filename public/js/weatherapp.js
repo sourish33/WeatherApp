@@ -259,6 +259,13 @@ document.getElementById("useMyLoc").addEventListener('click', autoLocate)
 alertbtn.addEventListener("click", handleAlertClose)
 hourlyButton.addEventListener("click", toggleHourly)
 dailyButton.addEventListener("click", toggleDaily)
+document.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      if (formInput.value !== ""){
+          handleClickSubmit()
+      }
+    }
+})
 clearData()
 // autoLocate()
 
