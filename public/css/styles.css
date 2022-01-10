@@ -84,3 +84,7 @@ img {
 .aqi-para {
     border-radius: 10px;
 }
+
+.alertcard {
+    background: lightpink;
+}
