@@ -37,7 +37,7 @@ const aqiDangerLevel = (aqival) =>{
     if (aqi>100 && aqi <=150) {return "Unhealthy for Sensitive Grps"}
     if (aqi>150 && aqi <=200) {return "Unhealthy"}
     if (aqi>200 && aqi <=300) {return "Very Unhealthy"}
-    if (aqi>300) {return "Hazardoud"}
+    if (aqi>300) {return "Hazardous"}
 }
 
 const roundToNearest10 = (num) =>{

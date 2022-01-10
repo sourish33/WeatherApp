@@ -1,0 +1,5 @@
+http://localhost:3000/weather?address=Delhi
+https://api.waqi.info/feed/geo:36;-86/?token=d988e63d8501a0de367665f90f778932ce3594e8
+https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=0edf04cd12cd717d3c62ff12f3b844ea&units=imperial
+https://api.opencagedata.com/geocode/v1/json?key=5f8b51c4764c44828869f238f28c0aa3&q=36.102%2C-86.81&pretty=1
+https://api.mapbox.com/geocoding/v5/mapbox.places/Vladivostok.json?access_token=pk.eyJ1Ijoic291cmlzaDMzIiwiYSI6ImNreG5oN2M4NjZhem8zMW11emwxeTNxNTUifQ.aGPirHsIa1WdNXe4TwoE-g&limit=1
