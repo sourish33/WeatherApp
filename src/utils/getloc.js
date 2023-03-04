@@ -1,7 +1,8 @@
 const request = require("postman-request")
+const API_KEY = "ead98a008243499d92efeaf0cbd58dc0"
 
 const getloc = (LAT, LNG) => {
-    const url = `https://api.opencagedata.com/geocode/v1/json?q=${LAT}+${LNG}&key=5f8b51c4764c44828869f238f28c0aa3`
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${LAT}+${LNG}&key=${API_KEY}`
     return new Promise((resolve, reject)=>{
         request({ url: url, json: true }, (err, {body}) => {
             if (err) {
