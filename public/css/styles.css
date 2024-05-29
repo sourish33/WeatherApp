@@ -32,7 +32,7 @@ body {
     padding: 1em;
     margin-bottom: 1em;
     border: 1px solid #7f8c8d; /* Add a border with a subtle color */
-    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 table {
@@ -104,6 +104,28 @@ img {
 
 .longtext {
     display: block;
+}
+
+.btn-primary {
+    background-color: #3498db; /* Blue */
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+.btn-danger {
+    background-color: #e74c3c; /* Red */
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+.btn-toolbar .btn {
+    margin-right: 5px;
 }
 
 @media (max-width: 767.98px) {
