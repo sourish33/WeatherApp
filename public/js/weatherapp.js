@@ -11,6 +11,7 @@ const hourlyForecastBody = document.getElementById("hourly-forecast-container")
 
 
 
+
 const fillCurrentData = (data) => {
     const { lat, long, current, hourly, daily, alerts, name, aqi } = data
     const [cmHg, atm] = convertPressure(current.pressure)
@@ -151,6 +152,7 @@ const fillDailyData = (data) => {
 }
 
 const processData = (searchquerry) =>{
+    document.getElementById("spinner").style.display = "block"
     fetch(searchquerry)
     .then((response) => response.json())
     .then((response) => {
