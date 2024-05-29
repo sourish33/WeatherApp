@@ -12,9 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.2",
+    "express": "^4.19.2",
     "hbs": "^4.2.0",
-    "nodemon": "^2.0.15",
-    "postman-request": "^2.88.1-postman.30"
+    "nodemon": "^3.1.2",
+    "postman-request": "^2.88.1-postman.33"
   }
 }

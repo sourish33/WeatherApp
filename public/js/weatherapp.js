@@ -252,6 +252,12 @@ const autolocateOptions = {
     processData(searchquerry)
 }
 
+const initialSearch = () => {
+    const defaultLoc = "Nashville"
+    const searchquerry = `/weather?address=${encodeURIComponent(defaultLoc)}`
+    processData(searchquerry)
+}
+
   
 document.getElementById("submitBtn").addEventListener("click", handleClickSubmit)
 document.getElementById("clearBtn").addEventListener("click", clearData)
@@ -267,5 +273,6 @@ document.addEventListener('keypress', function (e) {
     }
 })
 clearData()
-// autoLocate()
+initialSearch()
+
 

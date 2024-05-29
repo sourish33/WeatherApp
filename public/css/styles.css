@@ -1,84 +1,87 @@
 body {
-    color: #333333;
-    font-family: arial;
-    background:  #fdf6c6;
+    color: #2c3e50;
+    font-family: 'Roboto', sans-serif;
+    background: #ecf0f1;
+    margin: 0;
+    padding: 0;
 }
 
 .bold {
     font-weight: bold;
-    color: #543d34;
+    color: #2c3e50;
 }
 
 .navbarstyle {
-    background: #22577e;
+    background: #34495e;
+    padding: 1em 0;
 }
 
 .navbartext {
-    font-size: 2em;
+    font-size: 1.5em;
+    color: #ecf0f1;
+    font-weight: bold;
 }
 
 .white-text {
-    color:white
+    color: #ecf0f1;
 }
 
-.current {
-    background: #a0d568;
-}
-
-.hourly {
-    background: #d0a85f;
-}
-
-
-.daily {
-    background: #d0a85f;
-}
-
-.list-group-item {
-    background: #d0a85f;
+.current, .hourly, .daily, .list-group-item {
+    background: #bdc3c7; /* Slightly darker than the page background */
+    border-radius: 10px;
+    padding: 1em;
+    margin-bottom: 1em;
+    border: 1px solid #7f8c8d; /* Add a border with a subtle color */
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 table {
     border-bottom: hidden;
+    width: 100%;
+    margin-top: 1em;
 }
 
 img {
     opacity: 1.0;
+    width: 100px;
+    height: 100px;
 }
 
-.imgbgd{
-    /* background-color: lightpink; */
-    background-color:#e5e7e9
+.imgbgd {
+    background-color: #e5e7e9;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
 }
 
 .aqiGood {
-    background: #00e400;
-    color: black;
+    background: #27ae60;
+    color: white;
 }
 
 .aqiMod {
-    background: #ffff00;
-    color:black;
+    background: #f1c40f;
+    color: black;
 }
 
 .aqiUnh1 {
-    background: #ff7e00;
-    color:white;
+    background: #e67e22;
+    color: white;
 }
 
 .aqiUnh2 {
-    background: #ff0000;
-    color:white;
+    background: #e74c3c;
+    color: white;
 }
 
 .aqiUnh3 {
-    background: #8f3f97;
-    color:white;
+    background: #9b59b6;
+    color: white;
 }
 
 .aquiHaz {
     background: #7e0023;
-    color: white
+    color: white;
 }
 
 .aqi-para {
@@ -87,21 +90,27 @@ img {
 }
 
 .alertcard {
-    background: lightpink;
+    background: #e74c3c;
+    color: white;
+    padding: 1em;
+    border-radius: 10px;
+    border: 1px solid #c0392b; /* Border to match the alert color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Match other cards' shadows */
 }
 
 .shorttext {
     display: none;
-  }
+}
+
 .longtext {
-      display: block;
-    }
+    display: block;
+}
 
 @media (max-width: 767.98px) {
     .longtext {
-      display: none;
+        display: none;
     }
     .shorttext {
         display: block;
-      }
-  }
+    }
+}
