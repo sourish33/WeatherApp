@@ -1,7 +1,7 @@
 const request = require("postman-request")
 
 const forecast = (lat, long) => {
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely&appid=0edf04cd12cd717d3c62ff12f3b844ea&units=imperial`
+    const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${long}&exclude=minutely&appid=0edf04cd12cd717d3c62ff12f3b844ea&units=imperial`
     return new Promise((resolve, reject) =>{
         request({ url: url, json: true }, (err, { body }) => {
             if (err) {
