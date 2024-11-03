@@ -32,6 +32,18 @@ app.get("", (req, res) => {
     })
 })
 
+app.get("/test", (req, res) => {
+    res.send({
+        error: null,
+        data: {
+            message: "Server is working!",
+            timestamp: new Date().toISOString()
+        },
+    });
+});
+
+
+
 
 
 
